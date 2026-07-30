@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens da Associação Atlética Juventude.
+ * Tailwind v4: tokens definidos via @theme (equivalente moderno do tailwind.config).
+ * Regra do projeto: NUNCA usar hex solto no JSX — sempre as classes semânticas abaixo.
+ *
+ *  - red      #E4141B → cor principal (fundos, blocos, botões, destaques)
+ *  - red-ink  #B00E14 → texto/link vermelho sobre fundo claro (contraste WCAG AA)
+ *  - wine     #7A1016 → vermelho-vinho/bordô; fundo secundário de seções alternadas
+ *  - ink      #0E0E10 → quase preto (texto principal, fundos escuros)
+ *  - paper    #F3F0EA → creme de fundo
+ *
+ * Sem dourado/amarelo na paleta — a única exceção visual é o brasão oficial
+ * da FPFS (marca de terceiro, mantém as cores originais via imagem).
+ */
+@theme {
+  --color-red: #e4141b;
+  --color-red-ink: #b00e14;
+  --color-wine: #7a1016;
+  --color-ink: #0e0e10;
+  --color-paper: #f3f0ea;
+
+  /* Fontes injetadas por next/font em app/layout.tsx (variáveis CSS) */
+  --font-display: var(--font-anton), "Arial Narrow", sans-serif;
+  --font-body: var(--font-raleway), Arial, sans-serif;
+}
+
+/* Base */
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+/* Foco visível consistente em todo o site (requisito WCAG 2.2 AA).
+   Vermelho sobre fundos claros; componentes sobre fundo vermelho/escuro
+   sobrescrevem com focus-visible:outline-paper / outline-ink. */
+:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+/* Respeita usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Animação do ticker (letreiro). Desativada acima para prefers-reduced-motion. */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+  }
+}
+
+/*
+ * Reveal ao rolar (components/ui/Reveal.tsx): fade + deslize suave quando a
+ * seção entra na viewport. Sem movimento para prefers-reduced-motion.
+ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.reveal-visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
