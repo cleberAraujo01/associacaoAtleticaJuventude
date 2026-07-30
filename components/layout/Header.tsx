@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { ChannelIcon } from "@/components/ui/ChannelIcon";
 import { canais, nav, site } from "@/config/site";
 
 /**
@@ -154,7 +155,7 @@ export function Header() {
       {/* Mega menu Canais — painel na largura total do header (só desktop) */}
       {canaisAberto && (
         <div
-          className="absolute inset-x-0 top-full hidden border-b-2 border-red bg-ink text-paper shadow-lg md:block"
+          className="absolute inset-x-0 top-full hidden border-b-2 border-red bg-white text-ink shadow-lg md:block"
           onBlur={(e) => {
             // Fecha quando o foco de teclado sai do painel
             if (!e.currentTarget.contains(e.relatedTarget)) setCanaisAberto(false);
@@ -171,11 +172,12 @@ export function Header() {
                 rel="noopener noreferrer"
                 className={`group border-l-4 border-red pl-4 ${canal.evento}`}
               >
-                <p className="font-display text-xl uppercase transition-opacity group-hover:opacity-80">
+                <p className="flex items-center gap-2 font-display text-xl uppercase transition-opacity group-hover:opacity-80">
+                  <ChannelIcon canal={canal.nome} className="h-5 w-5 text-red-ink" />
                   {canal.nome}
                 </p>
-                <p className="mt-1 text-sm text-paper/70">{canal.descricao}</p>
-                <p className="mt-2 text-xs font-bold uppercase tracking-widest text-paper underline decoration-red decoration-2 underline-offset-4 group-hover:no-underline">
+                <p className="mt-1 text-sm text-ink/70">{canal.descricao}</p>
+                <p className="mt-2 text-xs font-bold uppercase tracking-widest text-red-ink underline underline-offset-4 group-hover:no-underline">
                   {canal.acao} →
                 </p>
               </a>
