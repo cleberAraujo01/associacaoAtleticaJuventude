@@ -105,9 +105,9 @@ export function Footer() {
               <Image
                 src="/brasao-fpfs.webp"
                 alt="Brasão da Federação Paulista de Futsal"
-                width={100}
-                height={100}
-                className="h-auto w-28 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-32"
+                width={140}
+                height={140}
+                className="h-auto w-32 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-40"
               />
               <p className="text-center text-[10px] font-bold uppercase tracking-[0.2em] text-paper/70">
                 Filiado à FPFS
