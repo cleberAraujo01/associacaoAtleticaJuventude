@@ -73,6 +73,104 @@ body {
   }
 }
 
+/* Entrada dos menus do header (mega menu e menu mobile): fade + leve descida.
+   A regra global de prefers-reduced-motion acima já zera a duração. */
+@keyframes menu-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-entrada {
+  animation: menu-entrada 0.25s ease-out;
+}
+
+/*
+ * Splash de abertura (components/layout/SplashIntro.tsx): brasão + lema sobre
+ * fundo ink, uma vez por sessão. O overlay só existe visualmente quando um
+ * script inline no <head> seta html[data-splash="1"] antes do primeiro paint
+ * (primeira página da sessão e sem prefers-reduced-motion) — sem o atributo,
+ * display:none e zero flash. Coreografia: brasão e lema sobem em fade, o traço
+ * vermelho cresce, e o overlay inteiro sobe como cortina revelando o site.
+ */
+.splash-intro {
+  display: none;
+}
+
+[data-splash="1"] .splash-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  /* Vermelho chapado, a cor da camisa: fundo quieto para o brasão ser a estrela */
+  background-color: var(--color-red);
+  animation: splash-sair 0.6s cubic-bezier(0.65, 0, 0.35, 1) 2.1s forwards;
+}
+
+/* Vinheta sutil nas bordas — profundidade sem tirar o foco do brasão */
+[data-splash="1"] .splash-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Acima do fundo do overlay, abaixo do brasão/lema */
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    color-mix(in srgb, var(--color-ink) 55%, transparent) 100%
+  );
+}
+
+.splash-intro__brasao {
+  opacity: 0;
+  animation: splash-subir 0.7s ease-out 0.15s forwards;
+}
+
+.splash-intro__linha {
+  height: 4px;
+  width: 0;
+  /* Paper: o traço vermelho da assinatura sumiria sobre o fundo vermelho */
+  background-color: var(--color-paper);
+  animation: splash-linha 0.8s ease-out 0.55s forwards;
+}
+
+.splash-intro__frase {
+  opacity: 0;
+  animation: splash-subir 0.6s ease-out 0.75s forwards;
+}
+
+@keyframes splash-subir {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes splash-linha {
+  to {
+    width: 6rem;
+  }
+}
+
+@keyframes splash-sair {
+  to {
+    transform: translateY(-101%);
+  }
+}
+
 /*
  * Reveal ao rolar (components/ui/Reveal.tsx): fade + deslize suave quando a
  * seção entra na viewport. Sem movimento para prefers-reduced-motion.

@@ -55,40 +55,49 @@ export function AthletePath() {
           {passos.map((passo) => {
             const conteudo = (
               <>
-                <div className="flex items-start justify-between gap-2">
-                  <p
-                    className={`text-xs font-bold uppercase tracking-[0.2em] ${
-                      passo.destaque ? "text-paper" : "text-paper/60"
-                    }`}
-                  >
-                    Estágio {passo.numero} · {passo.rotulo}
-                  </p>
-                  {/* Selo FPFS no estágio de federação — reforço visual da afiliação */}
-                  {passo.destaque && (
-                    <Image
-                      src="/brasao-fpfs.webp"
-                      alt="Federação Paulista de Futsal"
-                      title="Filiado à FPFS"
-                      width={48}
-                      height={48}
-                      className="h-12 w-auto shrink-0 drop-shadow-md"
-                    />
-                  )}
-                </div>
-                {/* Numeração uniforme (marcador ordinal, não destaque) */}
+                {/* Número gigante ao fundo, cortado na borda — âncora visual do
+                    card no lugar da antiga barra vermelha superior */}
                 <span
                   aria-hidden="true"
-                  className="font-display mt-4 block text-6xl leading-none text-paper/30"
+                  className="font-display pointer-events-none absolute -bottom-7 right-1 text-[7.5rem] leading-none text-paper/10"
                 >
                   {passo.numero}
                 </span>
-                <h3 className="mt-3 font-display text-xl uppercase text-paper">{passo.titulo}</h3>
-                <p className="mt-2 text-sm text-paper/70">{passo.texto}</p>
-                {passo.cta && (
-                  <p className="mt-4 text-sm font-bold uppercase tracking-widest text-paper underline underline-offset-4 group-hover:no-underline">
-                    {passo.cta}
-                  </p>
-                )}
+                <div className="relative">
+                  <div className="flex items-start justify-between gap-2">
+                    <p
+                      className={`text-xs font-bold uppercase tracking-[0.2em] ${
+                        passo.destaque ? "text-paper" : "text-paper/60"
+                      }`}
+                    >
+                      Estágio {passo.numero} · {passo.rotulo}
+                    </p>
+                    {/* Selo FPFS no estágio de federação — reforço visual da afiliação */}
+                    {passo.destaque && (
+                      <Image
+                        src="/brasao-fpfs.webp"
+                        alt="Federação Paulista de Futsal"
+                        title="Filiado à FPFS"
+                        width={48}
+                        height={48}
+                        className="h-12 w-auto shrink-0 drop-shadow-md"
+                      />
+                    )}
+                  </div>
+                  <h3 className="mt-5 font-display text-2xl uppercase text-paper">{passo.titulo}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-paper/70">{passo.texto}</p>
+                  {passo.cta && (
+                    <p className="mt-5 text-sm font-bold uppercase tracking-widest text-paper">
+                      {passo.cta.replace(" →", "")}{" "}
+                      <span
+                        aria-hidden="true"
+                        className="inline-block transition-transform group-hover:translate-x-1"
+                      >
+                        →
+                      </span>
+                    </p>
+                  )}
+                </div>
               </>
             );
 
@@ -97,12 +106,14 @@ export function AthletePath() {
                 {passo.href ? (
                   <Link
                     href={passo.href}
-                    className={`group flex-1 border-t-4 border-red bg-paper/5 p-6 transition-colors hover:bg-paper/10 ${passo.evento}`}
+                    className={`group relative flex-1 overflow-hidden bg-paper/5 p-6 pb-8 transition-colors hover:bg-paper/10 ${passo.evento}`}
                   >
                     {conteudo}
                   </Link>
                 ) : (
-                  <div className="flex-1 border-t-4 border-red bg-paper/5 p-6">{conteudo}</div>
+                  <div className="relative flex-1 overflow-hidden bg-paper/5 p-6 pb-8">
+                    {conteudo}
+                  </div>
                 )}
               </li>
             );
