@@ -3,6 +3,7 @@ import { Anton, Raleway } from "next/font/google";
 import Script from "next/script";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { SplashIntro } from "@/components/layout/SplashIntro";
 import { Ticker } from "@/components/layout/Ticker";
 import { site } from "@/config/site";
 import "./globals.css";
@@ -33,7 +34,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${anton.variable} ${raleway.variable}`}>
+      <head>
+        {/* Decide ANTES do primeiro paint se o splash de abertura roda:
+            só na primeira página da sessão e sem prefers-reduced-motion.
+            Inline para não haver flash do conteúdo antes do overlay. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(!sessionStorage.getItem("aja-splash")&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.dataset.splash="1"}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="flex min-h-screen flex-col">
+        <SplashIntro />
         {/* Alvo do "Voltar ao topo" do footer — precisa ser um elemento
             não-sticky no topo real do documento (o header sticky não serve:
             como está sempre visível, o navegador não rola até ele). */}

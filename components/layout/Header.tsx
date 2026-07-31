@@ -109,7 +109,12 @@ export function Header() {
                       className={classe}
                     >
                       {item.label}
-                      <span aria-hidden="true" className="ml-1 text-xs">
+                      <span
+                        aria-hidden="true"
+                        className={`ml-1 inline-block text-xs transition-transform duration-200 motion-reduce:transition-none ${
+                          canaisAberto ? "rotate-180" : ""
+                        }`}
+                      >
                         ▾
                       </span>
                     </Link>
@@ -155,7 +160,7 @@ export function Header() {
       {/* Mega menu Canais — painel na largura total do header (só desktop) */}
       {canaisAberto && (
         <div
-          className="absolute inset-x-0 top-full hidden border-b-2 border-red bg-white text-ink shadow-lg md:block"
+          className="menu-entrada absolute inset-x-0 top-full hidden border-b-2 border-red bg-white text-ink shadow-lg md:block"
           onBlur={(e) => {
             // Fecha quando o foco de teclado sai do painel
             if (!e.currentTarget.contains(e.relatedTarget)) setCanaisAberto(false);
@@ -163,23 +168,34 @@ export function Header() {
         >
           {/* pl-56 desloca as colunas para a direita da zona do brasão (que vaza
               o header); py maior dá mais respiro ao painel */}
-          <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 md:grid-cols-3 md:pl-56">
+          <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 md:grid-cols-3 md:pl-56">
             {canais.map((canal) => (
               <a
                 key={canal.nome}
                 href={canal.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group border-l-4 border-red pl-4 ${canal.evento}`}
+                className={`group flex items-start gap-4 ${canal.evento}`}
               >
-                <p className="flex items-center gap-2 font-display text-xl uppercase transition-opacity group-hover:opacity-80">
-                  <ChannelIcon canal={canal.nome} className="h-5 w-5 text-red-ink" />
-                  {canal.nome}
-                </p>
-                <p className="mt-1 text-sm text-ink/70">{canal.descricao}</p>
-                <p className="mt-2 text-xs font-bold uppercase tracking-widest text-red-ink underline underline-offset-4 group-hover:no-underline">
-                  {canal.acao} →
-                </p>
+                {/* Ícone em disco vermelho — assinatura visual, sem barra lateral */}
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red text-paper transition-colors group-hover:bg-red-ink">
+                  <ChannelIcon canal={canal.nome} className="h-5 w-5" />
+                </span>
+                <span>
+                  <span className="block font-display text-base uppercase leading-tight">
+                    {canal.nome}
+                  </span>
+                  <span className="mt-1 block text-sm text-ink/70">{canal.descricao}</span>
+                  <span className="mt-2 block text-xs font-bold uppercase tracking-widest text-red-ink">
+                    {canal.acao}{" "}
+                    <span
+                      aria-hidden="true"
+                      className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+                    >
+                      →
+                    </span>
+                  </span>
+                </span>
               </a>
             ))}
           </div>
@@ -191,9 +207,9 @@ export function Header() {
         <nav
           id="menu-mobile"
           aria-label="Principal"
-          className="relative border-t border-paper/20 md:hidden"
+          className="menu-entrada relative border-t border-paper/20 md:hidden"
         >
-          <ul className="flex flex-col px-4 py-2">
+          <ul className="flex flex-col divide-y divide-paper/10 px-4 py-2">
             {nav.map((item) => {
               const ativo = pathname === item.href;
               return (
@@ -201,7 +217,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     aria-current={ativo ? "page" : undefined}
-                    className={`block py-3 text-base font-semibold uppercase tracking-wide text-paper decoration-red decoration-4 underline-offset-8 transition-colors hover:underline ${
+                    className={`block py-3.5 text-base font-semibold uppercase tracking-wide text-paper decoration-red decoration-4 underline-offset-8 transition-colors hover:underline ${
                       ativo ? "underline" : ""
                     }`}
                   >
@@ -210,6 +226,24 @@ export function Header() {
                 </li>
               );
             })}
+          </ul>
+
+          {/* Acesso direto às redes no mobile — ícones em disco, mesma
+              assinatura do mega menu desktop */}
+          <ul className="flex items-center gap-4 border-t border-paper/20 px-4 py-4">
+            {canais.map((canal) => (
+              <li key={canal.nome}>
+                <a
+                  href={canal.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={canal.nome}
+                  className={`flex h-11 w-11 items-center justify-center rounded-full bg-paper/15 text-paper transition-colors hover:bg-red ${canal.evento}`}
+                >
+                  <ChannelIcon canal={canal.nome} className="h-5 w-5" />
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
       )}

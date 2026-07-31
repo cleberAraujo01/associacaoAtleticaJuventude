@@ -7,12 +7,17 @@ import { canais, links, nav, site } from "@/config/site";
  * Rodapé sobre fundo de polígonos vermelhos com overlay escuro (gradiente ink)
  * para garantir legibilidade. Estrutura: 4 colunas de menus, brasão centralizado
  * e barra de copyright. Links com hover (sublinhado + branco pleno) e foco visível.
+ * No mobile, os menus quebram em 2 colunas e os brasões encolhem para o rodapé
+ * não virar uma rolagem interminável.
  */
 export function Footer() {
   const linkClasse =
     "inline-flex items-center gap-2 text-sm text-paper/90 transition-colors hover:text-paper hover:underline underline-offset-4";
 
-  const tituloClasse = "text-sm font-bold uppercase tracking-widest text-paper";
+  // Título de coluna com o sublinhado vermelho grosso — mesma assinatura do
+  // nav ativo do header e do "Juventude" na faixa de redes
+  const tituloClasse =
+    "inline-block text-sm font-bold uppercase tracking-widest text-paper underline decoration-red decoration-4 underline-offset-8";
 
   return (
     <footer className="relative border-t-4 border-red bg-red bg-[url('/fundo-footer.webp')] bg-cover bg-center text-paper">
@@ -24,7 +29,7 @@ export function Footer() {
 
       {/* Conteúdo acima do overlay */}
       <div className="relative">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid grid-cols-2 gap-8 px-4 py-12 max-w-6xl lg:grid-cols-4 lg:gap-10">
           {/* Páginas */}
           <nav aria-label="Rodapé">
             <h2 className={tituloClasse}>Páginas</h2>
@@ -81,7 +86,7 @@ export function Footer() {
             <h2 className={tituloClasse}>Contato</h2>
             <ul className="mt-4 space-y-2.5">
               <li>
-                <a href={`mailto:${links.email}`} className={linkClasse}>
+                <a href={`mailto:${links.email}`} className={`${linkClasse} break-all`}>
                   {links.email}
                 </a>
               </li>
@@ -91,15 +96,16 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Brasões centralizados abaixo dos menus: clube + afiliação à FPFS */}
-        <div className="flex flex-col items-center gap-3 px-4 pb-12">
+        {/* Brasões centralizados abaixo dos menus: clube + afiliação à FPFS
+            (menores no mobile para encurtar o rodapé) */}
+        <div className="flex flex-col items-center gap-3 px-4 pb-10 lg:pb-12">
           <div className="flex items-center justify-center gap-8 sm:gap-12">
             <Image
               src="/brasao-footer.png"
               alt={`Brasão da ${site.nome}`}
-              width={180}
-              height={180}
-              className="h-auto w-36 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-44"
+              width={224}
+              height={224}
+              className="h-auto w-32 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-56"
             />
             <div className="flex flex-col items-center gap-2">
               <Image
@@ -107,7 +113,7 @@ export function Footer() {
                 alt="Brasão da Federação Paulista de Futsal"
                 width={140}
                 height={140}
-                className="h-auto w-32 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-40"
+                className="h-auto w-24 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-40"
               />
               <p className="text-center text-[10px] font-bold uppercase tracking-[0.2em] text-paper/70">
                 Filiado à FPFS
@@ -127,9 +133,15 @@ export function Footer() {
             {/* Âncora para o topo (id="topo" no header) — navegação em páginas longas */}
             <a
               href="#topo"
-              className="font-bold uppercase tracking-widest text-paper/90 transition-colors hover:text-paper hover:underline underline-offset-4"
+              className="group font-bold uppercase tracking-widest text-paper/90 transition-colors hover:text-paper"
             >
-              Voltar ao topo ↑
+              Voltar ao topo{" "}
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform group-hover:-translate-y-0.5"
+              >
+                ↑
+              </span>
             </a>
           </div>
         </div>

@@ -28,20 +28,21 @@ export function Hero() {
             Futsal · {site.cidade}
           </p>
           <h1 className="font-display text-5xl uppercase leading-[0.95] sm:text-7xl">
-            {/* Destaque em preto (ink) — vermelho sumiria sobre o banner vermelho */}
-            Da base ao time. <span className="block text-ink">Uma só jornada.</span>
+            Da base ao time.{" "}
+            {/* Segunda linha em serigrafia (contorno paper) — assinatura visual do
+                site; vermelho ou preto chapado sumiriam sobre o banner vermelho */}
+            <span className="block text-transparent [-webkit-text-stroke:2px_var(--color-paper)]">
+              Uma só jornada.
+            </span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper">
-            A escolinha forma. O time compete na FPFS. Aqui, quem começa criança tem caminho para
-            chegar à quadra da federação.
+            Escolinha do Sub-8 ao Sub-16 e time adulto na quadra da Federação Paulista de Futsal. Do
+            primeiro treino ao jogo grande, a mesma camisa.
           </p>
         </div>
-        {/* Bifurcação por perfil: pergunta curta + CTA primário (conversão principal
-            do negócio = matrícula/mensalidade) e secundário (engajamento com o time) */}
+        {/* CTA primário (conversão principal do negócio = matrícula/mensalidade)
+            e secundário (engajamento com o time) — direto, sem pergunta de template */}
         <div className="mt-9 lg:pl-20">
-          <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-paper/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
-            Você está aqui para...
-          </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <CtaLink
               href={links.whatsappMatricula}

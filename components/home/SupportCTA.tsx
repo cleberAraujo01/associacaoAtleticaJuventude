@@ -41,32 +41,50 @@ export function SupportCTA({ parceiros }: SupportCTAProps) {
           </div>
 
           {/* Card de captação — preenche o espaço e converte visibilidade em apoio */}
-          {/* Fundo vinho (secundário da paleta) destaca o card sobre a faixa branca */}
-          <div className="flex flex-col justify-center border-t-4 border-red bg-wine p-8 text-paper">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-paper/80">
-              Sua marca no jogo
-            </p>
-            <h3 className="mt-2 font-display text-3xl uppercase">Seja um parceiro</h3>
-            <p className="mt-3 text-sm leading-relaxed text-paper/80">
-              Apoie a formação de atletas em Santana de Parnaíba e apareça na camisa, na quadra e
-              nos canais do clube.
-            </p>
-            <div className="mt-6 flex flex-col gap-3">
-              <CtaLink
-                href={links.whatsappApoio}
-                variante="vermelho"
-                evento={eventos.saidaWhatsapp}
-                externo
-              >
-                <ChannelIcon canal="WhatsApp" />
-                Quero apoiar o clube
-              </CtaLink>
-              <Link
-                href="/apoie"
-                className="text-center text-sm font-bold uppercase tracking-widest text-paper/90 underline underline-offset-4 transition-colors hover:text-paper hover:no-underline"
-              >
-                Como funciona o apoio →
-              </Link>
+          {/* Fundo vinho (secundário da paleta) destaca o card sobre a faixa branca;
+              brasão em marca d'água no canto — mesma linguagem editorial da
+              faixa de redes sociais */}
+          <div className="relative flex flex-col justify-center overflow-hidden bg-wine p-8 text-paper">
+            <Image
+              src="/brasao.webp"
+              alt=""
+              width={515}
+              height={515}
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-16 -right-16 w-56 opacity-[0.07] brightness-0 invert"
+            />
+            <div className="relative">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-paper/80">
+                Sua marca no jogo
+              </p>
+              <h3 className="mt-2 font-display text-3xl uppercase">Seja um parceiro</h3>
+              <p className="mt-3 text-sm leading-relaxed text-paper/80">
+                Apoie a formação de atletas em Santana de Parnaíba e apareça na camisa, na quadra e
+                nos canais do clube.
+              </p>
+              <div className="mt-6 flex flex-col gap-3">
+                <CtaLink
+                  href={links.whatsappApoio}
+                  variante="vermelho"
+                  evento={eventos.saidaWhatsapp}
+                  externo
+                >
+                  <ChannelIcon canal="WhatsApp" />
+                  Quero apoiar o clube
+                </CtaLink>
+                <Link
+                  href="/apoie"
+                  className="group text-center text-sm font-bold uppercase tracking-widest text-paper/90 transition-colors hover:text-paper"
+                >
+                  Como funciona o apoio{" "}
+                  <span
+                    aria-hidden="true"
+                    className="inline-block transition-transform group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

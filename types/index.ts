@@ -21,12 +21,19 @@ export interface Atleta {
   foto?: string;
 }
 
+/** Um horário de treino da turma. */
+export interface Treino {
+  dia: string;
+  horario: string;
+}
+
 export interface Turma {
   id: string;
   nome: string;
   faixaEtaria: string;
-  dias: string;
-  horario: string;
+  treinos: Treino[];
+  /** Comissão técnica da turma (ex.: "Treinador — Romanelli"). */
+  comissao: string[];
   local: string;
 }
 
