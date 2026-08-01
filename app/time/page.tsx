@@ -13,9 +13,9 @@ import {
 } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Time competitivo",
+  title: "Time Sub-18",
   description:
-    "O time da AA Juventude na FPFS: próximos jogos, resultados e o elenco — com atletas formados na própria base.",
+    "O time Sub-18 da AA Juventude na FPFS: próximos jogos, resultados e o elenco, com atletas formados na própria base.",
 };
 
 /**
@@ -38,14 +38,14 @@ export default function TimePage() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-8 px-4 py-14">
           <div>
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-paper/80">
-              Estágio 02 · Competição · FPFS
+              Estágio 03 · Competição · FPFS
             </p>
             <h1 className="font-display max-w-2xl text-4xl uppercase leading-tight sm:text-6xl">
               O time de Santana de Parnaíba
             </h1>
             <p className="mt-4 max-w-xl text-lg text-paper/80">
-              Elenco competitivo na Federação Paulista de Futsal — com atletas formados na nossa
-              própria base.
+              Elenco Sub-18 na Federação Paulista de Futsal, com atletas formados na nossa própria
+              base.
             </p>
           </div>
           {/* Brasão da federação — reforço visual da afiliação citada no texto */}
@@ -149,7 +149,9 @@ export default function TimePage() {
       {/* Ponte de volta para a base */}
       <section className="bg-red py-14 text-paper">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="font-display text-3xl uppercase">Todo elenco começa em algum lugar</h2>
+          <h2 className="text-center font-display text-3xl uppercase md:text-left">
+            Todo elenco começa em algum lugar
+          </h2>
           <p className="mt-2 max-w-xl text-paper/90">
             O nosso começa na escolinha. Matricule quem você ama e faça parte dessa jornada.
           </p>

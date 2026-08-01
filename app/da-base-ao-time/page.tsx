@@ -6,7 +6,7 @@ import { getAtletasDaBase, getDepoimentosDaPonte } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Da base ao time",
   description:
-    "Histórias de atletas que começaram na escolinha da AA Juventude e chegaram ao time competitivo da FPFS.",
+    "Histórias de atletas que começaram na escolinha da AA Juventude e chegaram ao time Sub-18 que disputa a FPFS.",
 };
 
 /**

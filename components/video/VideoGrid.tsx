@@ -33,7 +33,7 @@ export function VideoGrid({ videos }: VideoGridProps) {
                     {video.titulo}
                   </span>
                   <span
-                    className={`shrink-0 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest ${
+                    className={`shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest ${
                       video.estagio === "time" ? "bg-paper text-ink" : "bg-red text-paper"
                     }`}
                   >

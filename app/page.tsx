@@ -1,4 +1,5 @@
 import { AthletePath } from "@/components/home/AthletePath";
+import { ChannelIcon } from "@/components/ui/ChannelIcon";
 import { Hero } from "@/components/home/Hero";
 import { ProofGrid } from "@/components/home/ProofGrid";
 import { RedesSociais } from "@/components/home/RedesSociais";
@@ -40,47 +41,60 @@ export default function HomePage() {
 
       {/* Vídeos do canal (facade — iframe só carrega no clique) */}
       <Reveal>
-        <section className="mx-auto max-w-6xl px-4 py-16">
-          <SectionHeading rotulo="Na quadra">Vídeos do clube</SectionHeading>
-          <VideoGrid videos={videos} />
-          <div className="mt-6">
+        <section className="mx-auto max-w-6xl px-4 py-16" aria-label="Vídeos do clube">
+          {/* Cabeçalho em duas colunas: título + apoio à esquerda, CTA do canal à direita */}
+          <div className="flex flex-wrap items-end justify-center gap-x-8 gap-y-4 md:justify-between">
+            <div>
+              <SectionHeading rotulo="Na quadra">Vídeos do clube</SectionHeading>
+              <p className="-mt-4 mb-8 max-w-xl text-center text-ink/70 md:text-left">
+                Amistosos, festivais e o dia a dia da escolinha, direto do nosso canal.
+              </p>
+            </div>
             <a
               href={links.youtube}
               target="_blank"
               rel="noopener noreferrer"
-              className={`text-sm font-bold uppercase tracking-widest text-red-ink underline underline-offset-4 hover:no-underline ${eventos.saidaYoutube}`}
+              className={`group mb-8 inline-flex items-center gap-2.5 rounded-full bg-red px-6 py-3 text-xs font-bold uppercase tracking-widest text-paper transition-colors hover:bg-red-ink ${eventos.saidaYoutube}`}
             >
-              Ver todos no YouTube →
+              <ChannelIcon canal="YouTube" className="h-4 w-4" />
+              Ver todos no YouTube
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+              >
+                →
+              </span>
             </a>
           </div>
+          <VideoGrid videos={videos} />
         </section>
       </Reveal>
 
-      {/* Respiro visual antes dos patrocinadores: foto real do time em quadra
-          (faixa do clube ao fundo) sob overlay escuro e o lema. A foto é
-          quadrada — bg-position em 32% mira o corte na altura dos rostos. */}
-      <Reveal>
-        <section
-          aria-label="Lema do clube"
-          className="border-y-2 border-red bg-wine bg-[url('/time-em-quadra.webp')] bg-cover bg-[position:center_32%] text-paper"
-        >
-          {/* Faixa mais alta que o padrão de "respiro" (min-h-72/96): a foto é
-              quadrada, e altura extra revela mais dela — menos sensação de zoom */}
-          {/* Overlay vinho uniforme (texto centralizado pede escurecimento
-              simétrico): o "vermelho escuro" da paleta dá o tom do clube */}
-          <div className="flex min-h-72 items-center bg-wine/75 sm:min-h-96">
-            <div className="mx-auto w-full max-w-6xl px-4 py-10 text-center">
-              <p className="font-display text-3xl uppercase leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] sm:text-4xl">
-                O futsal de Santana de Parnaíba tem{" "}
-                <span className="underline decoration-red decoration-8 underline-offset-8">
-                  nome e camisa
-                </span>
-                .
-              </p>
-            </div>
+      {/* Respiro visual antes dos patrocinadores: arte do atleta de costas com
+          a camisa AA Juventude — ilustra o lema ("nome e camisa") ao pé da letra.
+          SEM <Reveal>: o transform da animação criaria um containing block e
+          quebraria o background-attachment: fixed (a foto voltaria a rolar). */}
+      <section
+        aria-label="Lema do clube"
+        className="bg-wine bg-[url('/lema-camisa.webp')] bg-cover bg-center bg-fixed text-paper"
+      >
+        {/* bg-fixed: a foto fica parada enquanto a página rola — efeito de
+            "janela" para a quadra, em todos os tamanhos. Exceção: iOS Safari
+            ignora background-attachment: fixed e rola normalmente. */}
+        <div className="flex min-h-72 items-center sm:min-h-96">
+          <div className="mx-auto w-full max-w-6xl px-4 py-12 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-paper/80 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+              Santana de Parnaíba/SP
+            </p>
+            <p className="mt-3 font-display text-3xl uppercase leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:text-5xl">
+              O futsal daqui tem nome.
+              <span className="block">
+                E veste <span className="text-red">essa camisa</span>.
+              </span>
+            </p>
           </div>
-        </section>
-      </Reveal>
+        </div>
+      </section>
 
       <Reveal>
         <SupportCTA parceiros={parceiros} />

@@ -63,6 +63,8 @@ export interface Depoimento {
   texto: string;
   /** Depoimento que conta a travessia base → time (prioridade na home). */
   contaAPonte: boolean;
+  /** Foto da pessoa/família em /public (opcional até coletar com autorização). */
+  foto?: string;
 }
 
 export interface Video {
@@ -91,6 +93,10 @@ export interface Professor {
   nome: string;
   /** Registro profissional (ex.: "CREF 000000-G/SP"). */
   cref?: string;
+  /** Categorias/frentes que atende, curto, para o badge (ex.: "Sub-10 · Sub-14"). */
+  categorias: string;
+  /** Frase pessoal do treinador — o lado humano do card (estilo citação). */
+  frase: string;
   /** Cursos, formações e experiências relevantes. */
   credenciais: string[];
   /** Breve descrição do trabalho com as turmas. */

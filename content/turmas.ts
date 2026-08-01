@@ -6,6 +6,8 @@ import type { Turma } from "@/types";
  * coordenação antes de cada ciclo.
  *
  * TODO: conteúdo pendente: local dos treinos (endereço do ginásio).
+ * TODO: conteúdo pendente: turma Sub-18 (clube atende até o Sub-18 — coletar
+ * faixa etária, horários e comissão para incluir na tabela).
  */
 export const turmas: Turma[] = [
   {

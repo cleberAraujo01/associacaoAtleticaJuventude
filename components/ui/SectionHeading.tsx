@@ -9,7 +9,7 @@ interface SectionHeadingProps {
 /** Título de seção (h2) padronizado — garante hierarquia h1→h2 consistente. */
 export function SectionHeading({ rotulo, children, escuro }: SectionHeadingProps) {
   return (
-    <div className="mb-8">
+    <div className="mb-8 text-center md:text-left">
       {rotulo && (
         <p
           className={`mb-1 text-xs font-bold uppercase tracking-[0.2em] ${

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ChannelIcon } from "@/components/ui/ChannelIcon";
 import { canais, site } from "@/config/site";
 
@@ -15,41 +14,19 @@ export function RedesSociais() {
       aria-label={`Redes sociais da ${site.nomeCurto}`}
       className="relative overflow-hidden bg-wine py-10 text-paper"
     >
-      {/* Marca d'água: brasão gigante sangrando nas bordas (decorativo) */}
-      <Image
-        src="/brasao.webp"
-        alt=""
-        width={515}
-        height={515}
+      {/* Arte oficial da faixa (textura vermelha com os brasões laterais já
+          embutidos): variante vertical no mobile, larga no md+ */}
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-24 top-1/2 w-80 -translate-y-1/2 opacity-[0.06] brightness-0 invert sm:w-96"
-      />
-      <Image
-        src="/brasao.webp"
-        alt=""
-        width={515}
-        height={515}
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-28 top-1/2 w-80 -translate-y-1/2 opacity-[0.06] brightness-0 invert sm:w-96"
+        className="absolute inset-0 bg-[url('/fundo-redes-mobile.webp')] bg-cover bg-center md:bg-[url('/fundo-redes.webp')]"
       />
       <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-6 px-4">
-        <h2 className="flex flex-wrap items-center justify-center gap-3 text-center font-display text-2xl uppercase sm:text-3xl">
-          {/* Monograma AJA real (decorativo — o nome já está no texto) */}
-          <Image
-            src="/monograma.webp"
-            alt=""
-            width={80}
-            height={80}
-            aria-hidden="true"
-            className="h-10 w-10 sm:h-12 sm:w-12"
-          />
-          <span>
-            Siga o{" "}
-            <span className="underline decoration-red decoration-4 underline-offset-8">
-              Juventude
-            </span>{" "}
-            nas redes
-          </span>
+        <h2 className="text-center font-display text-2xl uppercase sm:text-3xl">
+          Siga o{" "}
+          <span className="underline decoration-red decoration-4 underline-offset-8">
+            Juventude
+          </span>{" "}
+          nas redes
         </h2>
         <ul className="flex flex-wrap items-center justify-center gap-4">
           {canais.map((canal) => (

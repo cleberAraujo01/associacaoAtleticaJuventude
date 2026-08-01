@@ -20,25 +20,25 @@ export const videos: Video[] = [
   {
     id: "amistoso-sub10-nacional",
     youtubeId: "9Ildt9R0SSc",
-    titulo: "Amistoso Sub-10 — CFA Juventude x Nacional Academy",
+    titulo: "Amistoso Sub-10: CFA Juventude x Nacional Academy",
     estagio: "escolinha",
   },
   {
     id: "amistoso-sub9-nacional",
     youtubeId: "CpjmZ-tGIR8",
-    titulo: "Amistoso Sub-9 — CFA Juventude x Nacional Academy",
+    titulo: "Amistoso Sub-9: CFA Juventude x Nacional Academy",
     estagio: "escolinha",
   },
   {
     id: "amistoso-sub8-nacional",
     youtubeId: "juy_atkZqtE",
-    titulo: "Amistoso Sub-8 — CFA Juventude x Nacional Academy",
+    titulo: "Amistoso Sub-8: CFA Juventude x Nacional Academy",
     estagio: "escolinha",
   },
   {
     id: "amistoso-sub7-nacional",
     youtubeId: "WQ0cvisoJAk",
-    titulo: "Amistoso Sub-7 — CFA Juventude x Nacional Academy",
+    titulo: "Amistoso Sub-7: CFA Juventude x Nacional Academy",
     estagio: "escolinha",
   },
   {

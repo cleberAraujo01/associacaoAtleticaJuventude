@@ -29,7 +29,8 @@ const estilos: Record<Variante, string> = {
  * vermelho global (globals.css → :focus-visible) ou o override da variante.
  */
 export function CtaLink({ href, children, variante = "vermelho", evento, externo }: CtaLinkProps) {
-  const className = `inline-flex items-center justify-center gap-2 px-6 py-3.5 text-center text-sm font-bold uppercase tracking-widest transition-all ${estilos[variante]} ${evento ?? ""}`;
+  // rounded-full: pílula é a linguagem de botão do site (par da hero da home)
+  const className = `inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-center text-sm font-bold uppercase tracking-widest transition-all ${estilos[variante]} ${evento ?? ""}`;
 
   if (externo) {
     return (

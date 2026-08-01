@@ -7,8 +7,10 @@ export const site = {
   nome: "Associação Atlética Juventude",
   nomeCurto: "AA Juventude",
   descricao:
-    "Futsal em Santana de Parnaíba/SP: escolinha de iniciação e time competitivo na FPFS. Da base ao time.",
+    "Futsal em Santana de Parnaíba/SP: escolinha do Sub-8 ao Sub-18 e time de competição na FPFS. Da base ao time.",
   cidade: "Santana de Parnaíba/SP",
+  endereco:
+    "Estr. Rosemari Hidalgo dos Santos, 149 - Antigo número 81 - Refúgio dos Bandeirantes, Santana de Parnaíba - SP, 06506-001",
   url: "https://aajuventude.com.br", // TODO: conteúdo pendente — domínio a confirmar com o clube
 } as const;
 
@@ -23,20 +25,35 @@ export const nav = [
 ] as const;
 
 /**
+ * Links secundários que no desktop vivem no footer (Páginas extras + Market).
+ * No mobile o footer mostra só os brasões, então eles migram para o menu
+ * hambúrguer do header — fonte única para não divergirem.
+ */
+export const navExtra = [
+  { href: "/apoie", label: "Apoie o clube" },
+  { href: "/parceiros", label: "Parceiros e apoiadores" },
+  { href: "/contato", label: "Contato" },
+] as const;
+
+/**
  * Links externos.
- * TODO: conteúdo pendente — número de WhatsApp e Instagram a confirmar antes do lançamento.
- * YouTube confirmado: canal real do clube.
+ * Contatos oficiais conforme o flyer "Estrutura Técnica" do clube:
+ * WhatsApp 11 94112-6936 · Instagram @a.a_juventude · cfajuventude@gmail.com.
  */
 export const links = {
   whatsappMatricula:
-    "https://wa.me/5511999999999?text=" +
+    "https://wa.me/5511941126936?text=" +
     encodeURIComponent("Olá! Quero matricular na escolinha da AA Juventude."),
   whatsappApoio:
-    "https://wa.me/5511999999999?text=" + encodeURIComponent("Olá! Quero apoiar a AA Juventude."),
+    "https://wa.me/5511941126936?text=" + encodeURIComponent("Olá! Quero apoiar a AA Juventude."),
   youtube: "https://www.youtube.com/@C.F.AJuventude",
-  instagram: "https://www.instagram.com/aajuventude",
+  instagram: "https://www.instagram.com/a.a_juventude",
   facebook: "https://www.facebook.com/profile.php?id=100063646510080",
-  email: "contato@aajuventude.com.br", // TODO: conteúdo pendente — e-mail a confirmar com o clube
+  email: "cfajuventude@gmail.com",
+  /** Link para o local no Google Maps (abre o app/site do Maps). */
+  maps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.endereco)}`,
+  /** URL de embed do Google Maps para o iframe da página de contato (sem API key). */
+  mapsEmbed: `https://www.google.com/maps?q=${encodeURIComponent(site.endereco)}&output=embed`,
 } as const;
 
 /**

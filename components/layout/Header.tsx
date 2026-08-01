@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChannelIcon } from "@/components/ui/ChannelIcon";
-import { canais, nav, site } from "@/config/site";
+import { canais, nav, navExtra, site } from "@/config/site";
 
 /**
  * Client Component: interatividade do layout (menu mobile + mega menu Canais).
@@ -40,10 +40,27 @@ export function Header() {
     return () => document.removeEventListener("pointerdown", fecharSeFora);
   }, [aberto]);
 
+  // Na home o header começa transparente sobre o banner da hero (a mesma
+  // imagem preenche header + hero) e ganha o fundo sólido ao rolar.
+  const [rolou, setRolou] = useState(false);
+  useEffect(() => {
+    const aoRolar = () => setRolou(window.scrollY > 16);
+    aoRolar();
+    window.addEventListener("scroll", aoRolar, { passive: true });
+    return () => window.removeEventListener("scroll", aoRolar);
+  }, []);
+
+  // Sólido sempre que houver menu aberto (legibilidade) ou fora do topo da home
+  const transparente = pathname === "/" && !rolou && !aberto && !canaisAberto;
+
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-40 border-b-2 border-red bg-red bg-[url('/fundo-poligonos.webp')] bg-cover bg-center text-paper"
+      className={`sticky top-0 z-40 border-b-2 text-paper transition-colors duration-300 ${
+        transparente
+          ? "border-transparent bg-transparent"
+          : "border-red bg-red bg-[url('/fundo-poligonos.webp')] bg-cover bg-center"
+      }`}
       onKeyDown={(e) => {
         if (e.key === "Escape") {
           setCanaisAberto(false);
@@ -53,13 +70,19 @@ export function Header() {
       // Fecha ao sair do header inteiro — permite mover o mouse do item até o painel
       onMouseLeave={() => setCanaisAberto(false)}
     >
-      {/* Overlay — escurece o fundo de polígonos e melhora o contraste (par do footer) */}
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-ink/35 to-ink/55" />
+      {/* Overlay — escurece o fundo de polígonos e melhora o contraste (par do footer);
+          some junto com o fundo quando o header está transparente sobre a hero */}
+      <div
+        aria-hidden="true"
+        className={`absolute inset-0 bg-gradient-to-b from-ink/35 to-ink/55 transition-opacity duration-300 ${
+          transparente ? "opacity-0" : "opacity-100"
+        }`}
+      />
 
       <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-6">
         <Link
           href="/"
-          className="flex items-center gap-3 font-display text-xl uppercase leading-none tracking-wide text-paper transition-opacity hover:opacity-80"
+          className="flex items-center gap-3 font-display text-2xl uppercase leading-none tracking-wide text-paper transition-opacity hover:opacity-80 sm:text-3xl"
         >
           {/* Brasão: posicionado absoluto para vazar a borda inferior do header
               (metade dentro, metade fora). O span reserva o espaço no fluxo. */}
@@ -69,7 +92,7 @@ export function Header() {
             width={120}
             height={120}
             priority
-            className="absolute top-1 z-50 h-24 w-24 rounded-full bg-white p-1.5 drop-shadow-lg sm:h-32 sm:w-32"
+            className="absolute top-4 z-50 h-24 w-24 rounded-full bg-white p-1.5 drop-shadow-lg sm:h-32 sm:w-32"
           />
           <span aria-hidden="true" className="w-24 sm:w-32" />
           {site.nomeCurto}
@@ -82,7 +105,7 @@ export function Header() {
           title="Filiado à FPFS"
           width={40}
           height={40}
-          className="ml-2 mr-auto h-9 w-auto drop-shadow-md sm:h-10"
+          className="ml-3 mr-auto h-11 w-auto drop-shadow-md sm:h-12"
         />
 
         {/* Navegação desktop */}
@@ -228,6 +251,22 @@ export function Header() {
             })}
           </ul>
 
+          {/* Links secundários (vindos do footer, escondido no mobile):
+              apoio, parceiros e contato — estilo mais discreto que o nav principal */}
+          <ul className="flex flex-col divide-y divide-paper/10 border-t border-paper/20 px-4 py-2">
+            {navExtra.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  className="block py-3 text-sm font-semibold uppercase tracking-wide text-paper/85 transition-colors hover:text-paper"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
           {/* Acesso direto às redes no mobile — ícones em disco, mesma
               assinatura do mega menu desktop */}
           <ul className="flex items-center gap-4 border-t border-paper/20 px-4 py-4">
@@ -237,8 +276,8 @@ export function Header() {
                   href={canal.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={canal.nome}
-                  className={`flex h-11 w-11 items-center justify-center rounded-full bg-paper/15 text-paper transition-colors hover:bg-red ${canal.evento}`}
+                  aria-label={`Abrir ${canal.nome} da ${site.nomeCurto} em nova aba`}
+                  className={`flex h-11 w-11 items-center justify-center rounded-full bg-paper/15 text-paper transition-colors hover:bg-red focus-visible:outline-paper ${canal.evento}`}
                 >
                   <ChannelIcon canal={canal.nome} className="h-5 w-5" />
                 </a>

@@ -7,8 +7,8 @@ import { canais, links, nav, site } from "@/config/site";
  * Rodapé sobre fundo de polígonos vermelhos com overlay escuro (gradiente ink)
  * para garantir legibilidade. Estrutura: 4 colunas de menus, brasão centralizado
  * e barra de copyright. Links com hover (sublinhado + branco pleno) e foco visível.
- * No mobile, os menus quebram em 2 colunas e os brasões encolhem para o rodapé
- * não virar uma rolagem interminável.
+ * No mobile os menus somem (migram para o menu hambúrguer do header) e o rodapé
+ * mostra apenas os brasões do clube e da FPFS + barra de copyright.
  */
 export function Footer() {
   const linkClasse =
@@ -29,7 +29,9 @@ export function Footer() {
 
       {/* Conteúdo acima do overlay */}
       <div className="relative">
-        <div className="mx-auto grid grid-cols-2 gap-8 px-4 py-12 max-w-6xl lg:grid-cols-4 lg:gap-10">
+        {/* Menus: escondidos no mobile (os links migram para o menu hambúrguer
+            do header) — no mobile o footer mostra só os brasões */}
+        <div className="mx-auto hidden max-w-6xl grid-cols-2 gap-8 px-4 py-12 md:grid lg:grid-cols-4 lg:gap-10">
           {/* Páginas */}
           <nav aria-label="Rodapé">
             <h2 className={tituloClasse}>Páginas</h2>
@@ -86,40 +88,39 @@ export function Footer() {
             <h2 className={tituloClasse}>Contato</h2>
             <ul className="mt-4 space-y-2.5">
               <li>
+                <Link href="/contato" className={linkClasse}>
+                  Fale com a gente
+                </Link>
+              </li>
+              <li>
                 <a href={`mailto:${links.email}`} className={`${linkClasse} break-all`}>
                   {links.email}
                 </a>
               </li>
-              {/* TODO: conteúdo pendente — endereço do ginásio/sede */}
-              <li className="text-sm text-paper/80">[Endereço a coletar] — {site.cidade}</li>
+              <li>
+                <a
+                  href={links.maps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClasse}
+                >
+                  {site.endereco}
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
-        {/* Brasões centralizados abaixo dos menus: clube + afiliação à FPFS
-            (menores no mobile para encurtar o rodapé) */}
-        <div className="flex flex-col items-center gap-3 px-4 pb-10 lg:pb-12">
-          <div className="flex items-center justify-center gap-8 sm:gap-12">
-            <Image
-              src="/brasao-footer.png"
-              alt={`Brasão da ${site.nome}`}
-              width={224}
-              height={224}
-              className="h-auto w-32 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-56"
-            />
-            <div className="flex flex-col items-center gap-2">
-              <Image
-                src="/brasao-fpfs.webp"
-                alt="Brasão da Federação Paulista de Futsal"
-                width={140}
-                height={140}
-                className="h-auto w-24 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-40"
-              />
-              <p className="text-center text-[10px] font-bold uppercase tracking-[0.2em] text-paper/70">
-                Filiado à FPFS
-              </p>
-            </div>
-          </div>
+        {/* Brasão do clube centralizado abaixo dos menus (a afiliação à FPFS
+            aparece no selo do header) */}
+        <div className="flex flex-col items-center gap-3 px-4 pb-10 pt-10 md:pt-0 lg:pb-12">
+          <Image
+            src="/brasao-footer.png"
+            alt={`Brasão da ${site.nome}`}
+            width={224}
+            height={224}
+            className="h-auto w-32 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-44"
+          />
           <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-paper/70">
             Da base ao time. Uma só jornada.
           </p>

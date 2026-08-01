@@ -77,36 +77,20 @@ export default function CanaisPage() {
         </div>
       </section>
 
-      {/* Contato e endereço (absorvido da antiga página /contato) */}
+      {/* Ponte para a página de contato (o conteúdo completo vive em /contato) */}
       <section className="bg-red py-14 text-paper">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="font-display text-3xl uppercase">Fale com a gente</h2>
+          <h2 className="text-center font-display text-3xl uppercase md:text-left">
+            Fale com a gente
+          </h2>
           <p className="mt-2 max-w-xl text-paper/90">
-            O jeito mais rápido é o WhatsApp — respondemos matrículas, apoio e imprensa.
+            WhatsApp para matrículas e apoio, e-mail para imprensa — tudo na página de contato.
           </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <CtaLink
-              href={links.whatsappMatricula}
-              variante="vermelho"
-              evento={`${eventos.ctaMatricula} ${eventos.saidaWhatsapp}`}
-              externo
-            >
-              Matrícula — WhatsApp
-            </CtaLink>
-            <CtaLink
-              href={links.whatsappApoio}
-              variante="claro"
-              evento={eventos.saidaWhatsapp}
-              externo
-            >
-              Outros assuntos
+          <div className="mt-6">
+            <CtaLink href="/contato" variante="claro">
+              Ir para o contato
             </CtaLink>
           </div>
-          {/* TODO: conteúdo pendente — endereço do ginásio/sede e horários de atendimento */}
-          <p className="mt-8 text-sm text-paper/80">
-            <strong className="font-bold uppercase tracking-wide">Onde estamos: </strong>
-            [Endereço e horários a coletar com o clube] — {site.cidade}.
-          </p>
         </div>
       </section>
     </>

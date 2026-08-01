@@ -195,3 +195,23 @@ body {
     transition: none;
   }
 }
+
+/*
+ * Banner da hero (components/home/Hero.tsx): zoom-out lento de abertura —
+ * a arte entra levemente ampliada e assenta no enquadramento final (Ken Burns
+ * discreto, uma vez só). A regra global de prefers-reduced-motion zera a
+ * duração e o banner já nasce na posição final.
+ */
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-zoom {
+  animation: hero-zoom 8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform;
+}

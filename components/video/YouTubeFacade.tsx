@@ -20,7 +20,7 @@ export function YouTubeFacade({ youtubeId, titulo, overlay }: YouTubeFacadeProps
 
   if (ativo) {
     return (
-      <div className="relative aspect-video w-full bg-ink">
+      <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-ink">
         <iframe
           className="absolute inset-0 h-full w-full"
           src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1`}
@@ -36,7 +36,7 @@ export function YouTubeFacade({ youtubeId, titulo, overlay }: YouTubeFacadeProps
     <button
       type="button"
       onClick={() => setAtivo(true)}
-      className="group relative block aspect-video w-full overflow-hidden bg-ink"
+      className="group relative block aspect-video w-full overflow-hidden rounded-2xl bg-ink"
       aria-label={`Assistir: ${titulo}`}
     >
       <Image
@@ -44,7 +44,7 @@ export function YouTubeFacade({ youtubeId, titulo, overlay }: YouTubeFacadeProps
         alt="" /* decorativa: o botão já tem aria-label com o título */
         fill
         sizes="(max-width: 768px) 100vw, 33vw"
-        className="object-cover opacity-90 transition-opacity group-hover:opacity-100"
+        className="object-cover opacity-90 transition-[opacity,transform] duration-300 group-hover:scale-105 group-hover:opacity-100 motion-reduce:transition-none"
       />
       {/* Botão de play */}
       <span
