@@ -20,8 +20,9 @@ const passos = [
     href: "/escolinha",
     cta: "Conhecer a escolinha",
     evento: "",
-    // Cone de treino
-    icone: "M12 4l4 14H8L12 4zM6 18h12M9.5 12h5",
+    // Bola de futsal
+    icone:
+      "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7.5l-4.3 3.1 1.7 5h5.2l1.7-5L12 7.5zM12 3.2v4.3M3.4 10l4.3.6M20.6 10l-4.3.6M7.2 20l2.2-3.4M16.8 20l-2.2-3.4",
   },
   {
     numero: "02",
@@ -32,8 +33,8 @@ const passos = [
     href: "/da-base-ao-time",
     cta: "Acompanhar o processo",
     evento: "",
-    // Prancheta tática
-    icone: "M5 4h14v16H5V4zM9 4v3h6V4M9 12l3 3 4-5",
+    // Gráfico de evolução em alta
+    icone: "M4 4v16h16M7 15l4-4 3 3 5-6M15 8h4v4",
   },
   {
     numero: "03",
@@ -44,52 +45,85 @@ const passos = [
     href: "/time",
     cta: "Acompanhar o time",
     evento: eventos.ctaAcompanharTime,
-    // Camisa do clube
-    icone: "M8 4l4 2 4-2 4 3-2 4-2-1v10H8V10l-2 1-2-4 4-3z",
+    // Troféu
+    icone: "M8 4h8v5a4 4 0 0 1-8 0V4zM8 6H4c0 3 2 4 4 4M16 6h4c0 3-2 4-4 4M12 13v4M8 21h8M10 17h4v4",
   },
 ] as const;
 
 export function AthletePath() {
   return (
-    <section aria-label="O trajeto do atleta" className="relative overflow-hidden bg-wine py-16">
-      {/* Brasão em marca d'água no canto superior direito (referência do flyer) */}
+    <section aria-label="O trajeto do atleta" className="relative overflow-hidden bg-wine py-20">
+      {/* Brasão em marca d'água no canto superior direito (referência do flyer).
+          Opacidade mínima: só aparece para quem observa com atenção. */}
       <Image
         src="/brasao.webp"
         alt=""
         width={515}
         height={515}
         aria-hidden="true"
-        className="pointer-events-none absolute -right-20 -top-20 w-80 opacity-[0.08] brightness-0 invert"
+        className="pointer-events-none absolute -right-20 -top-20 w-80 opacity-[0.04] brightness-0 invert"
       />
+      {/* Textura sutil de quadra: círculo central + linha do meio, quase
+          invisíveis (2% de opacidade) — tira a uniformidade do fundo sem poluir */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 1200 600"
+        fill="none"
+        stroke="var(--color-paper)"
+        strokeWidth="2"
+        preserveAspectRatio="xMidYMid slice"
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.02]"
+      >
+        <circle cx="600" cy="300" r="160" />
+        <circle cx="600" cy="300" r="6" />
+        <path d="M600 0v600M0 40h1200M0 560h1200" />
+        <path d="M0 140a260 260 0 0 1 0 320M1200 140a260 260 0 0 0 0 320" />
+      </svg>
 
       <div className="relative mx-auto max-w-6xl px-4">
-        {/* Cabeçalho no padrão do flyer: eyebrow bicolor, título e régua vermelha */}
-        <div className="mb-10">
-          <p className="text-xs font-bold uppercase tracking-[0.2em]">
+        {/* Cabeçalho no padrão do flyer: eyebrow bicolor, título e régua
+            vermelha — título maior e mais respiro antes dos cartões */}
+        <div className="mb-14">
+          <p className="text-sm font-bold uppercase tracking-[0.25em]">
             <span className="text-red">Nossa</span>{" "}
             <span className="text-paper">jornada</span>
           </p>
-          <h2 className="mt-2 font-display text-4xl uppercase leading-tight text-paper sm:text-5xl">
-            O trajeto do atleta
+          <h2 className="mt-3 font-display text-5xl uppercase leading-[0.95] text-paper sm:text-6xl">
+            O trajeto
+            <span className="block">do atleta</span>
           </h2>
-          <span aria-hidden="true" className="mt-4 block h-1 w-12 bg-red" />
-          <p className="mt-4 max-w-md text-paper/80">
+          <span aria-hidden="true" className="mt-5 block h-1 w-12 bg-red" />
+          <p className="mt-5 max-w-md text-paper/80">
             Mais que formar jogadores, formamos pessoas para a vida.
           </p>
+        </div>
+
+        {/* Trilha da jornada: ●────●────● conectando os três estágios (só no
+            desktop, onde os cartões ficam lado a lado) */}
+        <div aria-hidden="true" className="relative mb-6 hidden md:block">
+          <span className="absolute left-[16.67%] right-[16.67%] top-1/2 h-px -translate-y-1/2 bg-red/30" />
+          <div className="relative grid grid-cols-3">
+            {passos.map((passo) => (
+              <span
+                key={passo.numero}
+                className="mx-auto h-2.5 w-2.5 rounded-full border border-red/60 bg-red/80"
+              />
+            ))}
+          </div>
         </div>
 
         <ol className="grid gap-5 md:grid-cols-3">
           {passos.map((passo) => {
             const conteudo = (
               <>
-                {/* Número gigante em vermelho translúcido, cortado na borda */}
+                {/* Número gigante em vermelho translúcido, quase saindo do cartão */}
                 <span
                   aria-hidden="true"
-                  className="font-display pointer-events-none absolute -bottom-8 right-2 text-[8rem] leading-none text-red/20"
+                  className="font-display pointer-events-none absolute -bottom-12 -right-2 text-[11rem] leading-none text-red/20"
                 >
                   {passo.numero}
                 </span>
-                {/* Ícone de linha do estágio (cone / prancheta / camisa) */}
+                {/* Ícone de linha do estágio (bola / evolução / troféu) */}
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 24 24"
@@ -97,7 +131,7 @@ export function AthletePath() {
                   stroke="var(--color-red)"
                   strokeWidth="1.6"
                   strokeLinejoin="round"
-                  className="pointer-events-none absolute bottom-5 left-6 h-12 w-12 opacity-40"
+                  className="pointer-events-none absolute bottom-6 left-7 h-16 w-16 opacity-40"
                 >
                   <path d={passo.icone} />
                 </svg>
@@ -138,7 +172,7 @@ export function AthletePath() {
               <li key={passo.numero} className="flex">
                 <Link
                   href={passo.href}
-                  className={`group relative flex-1 overflow-hidden rounded-2xl border border-paper/15 bg-ink/35 p-6 pb-24 transition-colors hover:border-red/60 hover:bg-ink/45 ${passo.evento}`}
+                  className={`group relative flex-1 overflow-hidden rounded-2xl border border-paper/15 bg-ink/35 p-7 pb-28 transition-all duration-300 hover:-translate-y-2.5 hover:border-red hover:bg-ink/45 hover:shadow-[0_16px_40px_-8px_rgba(228,20,27,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${passo.evento}`}
                 >
                   {conteudo}
                 </Link>
@@ -147,13 +181,14 @@ export function AthletePath() {
           })}
         </ol>
 
-        {/* Barra de fechamento: convite para as histórias reais da ponte base→time */}
-        <div className="mt-8 flex flex-wrap items-center gap-5 rounded-2xl border border-paper/15 bg-ink/40 p-6 sm:p-7">
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-red bg-red/20 text-paper">
+        {/* Card premium de fechamento: convite centrado para as histórias
+            reais da ponte base→time — mais altura e respiro que uma barra */}
+        <div className="mt-10 flex flex-col items-center gap-6 rounded-2xl border border-paper/15 bg-ink/40 px-6 py-12 text-center sm:py-14">
+          <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-red bg-red/20 text-paper">
             {/* Grupo de pessoas */}
             <svg
-              width="26"
-              height="26"
+              width="30"
+              height="30"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -166,12 +201,14 @@ export function AthletePath() {
               <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 5.5a3 3 0 0 1 0 5M18.5 14.5c1.9 1 2.5 2.7 2.5 5.5" />
             </svg>
           </span>
-          <div className="min-w-52 flex-1">
-            <h3 className="font-display text-2xl uppercase leading-tight text-paper">
-              Conheça quem já fez esse caminho
+          <div>
+            <h3 className="font-display text-3xl uppercase leading-tight text-paper sm:text-4xl">
+              Conheça quem já
+              <span className="block">fez esse caminho</span>
             </h3>
-            <p className="mt-1 text-sm text-paper/70">
-              Histórias reais de dedicação, superação e conquistas.
+            <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-paper/70">
+              Histórias reais de dedicação, superação e conquistas de quem começou exatamente
+              assim.
             </p>
           </div>
           <Link

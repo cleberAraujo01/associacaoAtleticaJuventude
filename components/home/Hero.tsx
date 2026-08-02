@@ -79,20 +79,22 @@ export function Hero() {
   return (
     // -mt-24/pt-24: a hero sobe para trás do header (transparente no topo da
     // home) — a mesma imagem preenche as duas áreas, sem segunda arte.
-    <section className="relative -mt-24 flex min-h-[85svh] items-center overflow-hidden bg-red pt-24 text-paper">
+    // min-h-svh: hero em tela cheia — ocupa toda a altura do viewport
+    // (incluindo a faixa atrás do header transparente).
+    <section className="relative -mt-24 flex min-h-svh items-center overflow-hidden bg-red pt-24 text-paper">
       {/* Banner em camada própria: o zoom-out de abertura (hero-zoom) anima só
           a imagem, sem mexer no texto. A seção mais enxuta (py menores) também
           reduz o corte/zoom do bg-cover. No mobile entra a arte vertical do
           mascote (banner-hero-mobile); do md pra cima, o banner largo. */}
       <div
         aria-hidden="true"
-        className="hero-zoom absolute inset-0 bg-[url('/banner-hero-mobile.webp')] bg-cover bg-center md:bg-[url('/banner-hero-3.webp')]"
+        className="hero-zoom absolute inset-0 bg-[url('/banner-hero-mobile-2.webp')] bg-cover bg-center md:bg-[url('/banner-hero-4.webp')]"
       />
       {/* Overlay de legibilidade sobre o banner: mais forte no mobile (urso ao
           centro da arte vertical), mais leve no md+, onde o banner largo já
           reserva a área escura para o texto */}
       <div aria-hidden="true" className="absolute inset-0 bg-ink/55 md:bg-ink/35" />
-      <div className="relative mx-auto w-full max-w-[96rem] px-4 py-12 sm:py-16 lg:py-14">
+      <div className="relative mx-auto w-full max-w-[96rem] px-4 py-12 sm:py-16 lg:py-10">
         {/* Sombra suave em todo o bloco de texto — legibilidade sobre a textura do banner */}
         <div className="max-w-3xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] lg:pl-20">
           {/* Eyebrow de propósito (referência do clube) — a cidade segue no

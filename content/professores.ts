@@ -48,7 +48,7 @@ export const professores: Professor[] = [
     credenciais: ["Treinador de goleiros", "Atende todas as categorias"],
     descricao:
       "Cuida da posição mais solitária da quadra: técnica, posicionamento e confiança para os goleiros de todas as turmas.",
-    foto: "/professor-luizao.webp",
+    foto: "/professor-luizao-2.webp",
   },
   {
     id: "leandro",
