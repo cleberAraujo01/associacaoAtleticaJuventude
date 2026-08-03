@@ -18,7 +18,6 @@ export const nav = [
   { href: "/", label: "Início" },
   { href: "/escolinha", label: "Escolinha" },
   { href: "/time", label: "Time" },
-  { href: "/da-base-ao-time", label: "Da base ao time" },
   { href: "/quem-somos", label: "Quem somos" },
   { href: "/canais", label: "Canais" },
   // "/apoie" fora do menu principal: a captação de apoio acontece pela seção

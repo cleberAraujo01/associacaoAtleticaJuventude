@@ -48,11 +48,26 @@ export interface Jogo {
   horario?: string;
   local: string;
   mandante: boolean;
-  /** Preenchido apenas após o jogo. */
+  /**
+   * Categorias que entram em quadra na rodada — todas jogam no mesmo dia e
+   * no mesmo ginásio, cada uma no seu horário. Se omitido, a UI assume todas
+   * (Sub-08 a Sub-16), sem horários individuais.
+   */
+  categorias?: {
+    categoria: string;
+    horario?: string;
+  }[];
+  /** Placar geral/destaque (usado no ticker). Preenchido apenas após o jogo. */
   placar?: {
     juventude: number;
     adversario: number;
   };
+  /** Placar de cada categoria da rodada. Preenchido apenas após os jogos. */
+  placares?: {
+    categoria: string;
+    juventude: number;
+    adversario: number;
+  }[];
 }
 
 export interface Depoimento {
