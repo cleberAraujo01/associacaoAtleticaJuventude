@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { PageBanner } from "@/components/layout/PageBanner";
 import { ChannelIcon } from "@/components/ui/ChannelIcon";
 import { Reveal } from "@/components/ui/Reveal";
 import { eventos, links } from "@/config/site";
@@ -23,33 +24,13 @@ export default function ParceirosPage() {
 
   return (
     <>
-      {/* Vinho: fundo secundário da paleta para cabeçalhos de páginas de apoio.
-          Brasão em marca d'água — mesma linguagem editorial da faixa de redes. */}
-      <section className="relative overflow-hidden bg-wine text-paper">
-        <Image
-          src="/brasao.webp"
-          alt=""
-          width={515}
-          height={515}
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-20 -right-16 w-72 opacity-[0.07] brightness-0 invert"
-        />
-        <div className="relative mx-auto max-w-6xl px-4 py-14 sm:py-20">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-paper/70">
-            Quem joga junto
-          </p>
-          <h1 className="mt-3 max-w-2xl font-display text-4xl uppercase leading-tight sm:text-6xl">
-            Parceiros e{" "}
-            <span className="underline decoration-red decoration-8 underline-offset-8">
-              apoiadores
-            </span>
-          </h1>
-          <p className="mt-6 max-w-xl text-lg text-paper/85">
-            Quem veste essa camisa com a gente e sustenta o futsal de Santana de Parnaíba, da base
-            ao time.
-          </p>
-        </div>
-      </section>
+      {/* Banner padrão das páginas internas (arte compartilhada do PageBanner) */}
+      <PageBanner rotulo="Quem joga junto" titulo="Parceiros e apoiadores">
+        <p className="text-lg text-paper">
+          Quem veste essa camisa com a gente e sustenta o futsal de Santana de Parnaíba, da base
+          ao time.
+        </p>
+      </PageBanner>
 
       <Reveal>
         <section className="mx-auto max-w-6xl px-4 py-16">

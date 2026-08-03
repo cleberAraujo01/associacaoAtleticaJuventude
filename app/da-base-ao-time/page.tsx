@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageBanner } from "@/components/layout/PageBanner";
 import { DepoimentoCard } from "@/components/ui/DepoimentoCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getAtletasDaBase, getDepoimentosDaPonte } from "@/lib/content";
@@ -20,20 +21,13 @@ export default function DaBaseAoTimePage() {
 
   return (
     <>
-      <section className="bg-wine text-paper">
-        <div className="mx-auto max-w-6xl px-4 py-14">
-          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-paper/80">
-            A espinha dorsal do clube
-          </p>
-          <h1 className="font-display max-w-2xl text-4xl uppercase leading-tight sm:text-6xl">
-            Da base ao time
-          </h1>
-          <p className="mt-4 max-w-xl text-lg text-paper/80">
-            Quem começou criança na escolinha e hoje veste a camisa na FPFS. Estas são as histórias
-            que provam que o caminho existe.
-          </p>
-        </div>
-      </section>
+      {/* Banner padrão das páginas internas (arte compartilhada do PageBanner) */}
+      <PageBanner rotulo="A espinha dorsal do clube" titulo="Da base ao time">
+        <p className="text-lg text-paper">
+          Quem começou criança na escolinha e hoje veste a camisa na FPFS. Estas são as histórias
+          que provam que o caminho existe.
+        </p>
+      </PageBanner>
 
       <section className="mx-auto max-w-6xl px-4 py-16">
         <SectionHeading rotulo="Trajetórias">Quem já fez a travessia</SectionHeading>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { PageBanner } from "@/components/layout/PageBanner";
 import { PalavraDeFamilia } from "@/components/escolinha/PalavraDeFamilia";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { Reveal } from "@/components/ui/Reveal";
@@ -21,61 +22,38 @@ export const metadata: Metadata = {
 export default function EscolinhaPage() {
   const turmas = getTurmas();
   const professores = getProfessores();
-  const depoimentosFamilia = getDepoimentos().filter((d) => !d.contaAPonte);
+  // Só depoimentos de família REAIS: placeholders da data layer começam com
+  // "[" (regra do projeto: nunca expor colchetes ao público). Com um único
+  // depoimento, o carrossel esconde os dots automaticamente.
+  const depoimentosFamilia = getDepoimentos().filter(
+    (d) => !d.contaAPonte && !d.texto.trim().startsWith("[") && !d.autor.trim().startsWith("["),
+  );
 
   return (
     <>
-      {/* Cabeçalho da trilha — banner de quadra sobre textura vermelha
-          (bg-red é o fallback enquanto a imagem carrega). Linguagem editorial:
-          overlay ink para legibilidade, "01" gigante em marca d'água cortado na
-          borda (eco dos cards do trajeto) e o mascote da escolinha em corpo
-          inteiro, ancorado no chão do banner. */}
-      <section className="relative overflow-hidden bg-red bg-[url('/banner-escolinha.webp')] bg-cover bg-center text-paper">
-        {/* Overlay — escurece a esquerda (onde vive o texto) e o rodapé da faixa */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/40 to-ink/10"
-        />
-        <Image
-          src="/mascote-aula.webp"
-          alt=""
-          width={534}
-          height={720}
-          aria-hidden="true"
-          priority
-          className="pointer-events-none absolute bottom-0 left-1/2 w-64 -translate-x-1/2 drop-shadow-[0_28px_36px_rgba(0,0,0,0.65)] md:bottom-6 md:left-auto md:right-16 md:w-72 md:translate-x-0 lg:right-36 lg:w-80"
-        />
-        {/* Overlay acima do mascote (só no mobile, onde ele fica atrás do
-            texto) — garante a legibilidade sem apagar o urso */}
-        <div aria-hidden="true" className="absolute inset-0 bg-ink/45 md:hidden" />
-        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:py-28">
-          <p className="inline-block bg-red px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-paper shadow-md">
-            Estágio 01 · Iniciação
-          </p>
-          <h1 className="font-display mt-5 max-w-2xl text-4xl uppercase leading-tight sm:text-6xl">
-            Aqui o seu filho vira{" "}
-            <span className="underline decoration-red decoration-8 underline-offset-8">atleta</span>
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-paper/90">
-            Do Sub-8 ao Sub-18, três treinos por semana com quem forma jogador de verdade. O caminho
-            até o time da FPFS começa na primeira aula.
-          </p>
-          <div className="mt-8">
-            <CtaLink
-              href={links.whatsappMatricula}
-              variante="vermelho"
-              evento={`${eventos.ctaMatricula} ${eventos.saidaWhatsapp}`}
-              externo
-            >
-              Matricular pelo WhatsApp
-            </CtaLink>
-          </div>
+      {/* Banner padrão das páginas internas, na variante de CONVERSÃO: além do
+          título, mantém a linha de apoio e o CTA de matrícula acima da dobra.
+          Sub-16, não Sub-18: a escolinha treina até o Sub-16 — o Sub-18 é o
+          time competitivo (Estágio 03) e só é citado naquele contexto. */}
+      <PageBanner rotulo="Estágio 01 · Iniciação" titulo="Aqui o seu filho vira atleta">
+        <p className="text-lg text-paper">
+          Do Sub-8 ao Sub-16, três treinos por semana com quem forma jogador de verdade.
+        </p>
+        <div className="mt-6">
+          <CtaLink
+            href={links.whatsappMatricula}
+            variante="vermelho"
+            evento={`${eventos.ctaMatricula} ${eventos.saidaWhatsapp}`}
+            externo
+          >
+            Matricular pelo WhatsApp
+          </CtaLink>
         </div>
-      </section>
+      </PageBanner>
 
-      {/* Turmas e horários */}
+      {/* Turmas e horários — py maior: respiro antes e depois do título */}
       <Reveal>
-        <section className="mx-auto max-w-6xl px-4 py-16">
+        <section className="mx-auto max-w-6xl px-4 py-20 lg:py-24">
           <SectionHeading rotulo="Turmas e horários">Encontre a turma certa</SectionHeading>
           {/* Mobile: carrossel horizontal com snap (o card seguinte "espia" na
               borda, convidando o deslize) — evita a coluna infinita de cards.
@@ -86,8 +64,7 @@ export default function EscolinhaPage() {
               // número da categoria gigante em marca d'água ancorando o card
               <li
                 key={turma.id}
-                tabIndex={0}
-                className="group relative w-[82%] shrink-0 snap-center overflow-hidden bg-white p-6 pb-9 shadow-sm sm:w-auto sm:shrink"
+                className="relative w-[82%] shrink-0 snap-center overflow-hidden bg-white p-6 pb-9 shadow-sm sm:w-auto sm:shrink"
               >
                 {/* Número da categoria em contorno vermelho, estilo número de
                   camisa serigrafado — cortado na borda, sem preencher */}
@@ -97,22 +74,6 @@ export default function EscolinhaPage() {
                 >
                   {turma.nome.replace("Sub-", "")}
                 </span>
-                {/* Painel da comissão — sobe de dentro do card no hover/foco,
-                  como verso de ficha técnica (no toque, o foco também revela) */}
-                <div className="absolute inset-0 z-10 flex translate-y-full flex-col justify-end bg-wine p-6 pb-8 transition-transform duration-300 ease-out group-hover:translate-y-0 group-focus-within:translate-y-0 group-focus:translate-y-0 motion-reduce:transition-none">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-paper/60">
-                    Comissão da turma
-                  </p>
-                  <h4 className="mt-1 font-display text-2xl uppercase text-paper">{turma.nome}</h4>
-                  <ul className="mt-4 space-y-2">
-                    {turma.comissao.map((membro) => (
-                      <li key={membro} className="text-sm text-paper/90">
-                        {membro}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-4 text-xs text-paper/60">{turma.faixaEtaria}</p>
-                </div>
                 <div className="relative">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-red-ink">
                     {turma.faixaEtaria}
@@ -133,10 +94,10 @@ export default function EscolinhaPage() {
                       </li>
                     ))}
                   </ul>
-                  {/* Pista do painel oculto — sem ela, ninguém descobre o hover
-                    (no celular, o toque no card revela via foco) */}
-                  <p className="mt-4 text-[11px] font-bold uppercase tracking-widest text-red-ink">
-                    Comissão da turma +
+                  {/* Só o treinador principal — a ficha completa da comissão
+                    mora na seção "Comissão técnica" logo abaixo (sem duplicar) */}
+                  <p className="mt-4 border-t border-ink/10 pt-3 text-xs font-semibold text-ink/70">
+                    {turma.comissao[0]}
                   </p>
                 </div>
               </li>
@@ -173,7 +134,10 @@ export default function EscolinhaPage() {
           institucional, números da estrutura, cards com foto dominante, nome
           gigante e frase pessoal — confiança para pais/responsáveis */}
       <Reveal>
-        <section className="relative overflow-hidden bg-wine py-16">
+        {/* border-t-2 red: divisória fina na entrada da seção escura (assinatura
+            do site) — suaviza o corte paper → wine. Seção deliberadamente
+            COMPACTA: py contido, cabeçalho enxuto e cards de uma fileira. */}
+        <section className="relative overflow-hidden border-t-2 border-red bg-wine py-14 lg:py-16">
           {/* Marca d'água gigante atrás dos cards (monograma tipográfico) */}
           <span
             aria-hidden="true"
@@ -182,36 +146,53 @@ export default function EscolinhaPage() {
             AA
           </span>
           <div className="relative mx-auto max-w-6xl px-4">
-            {/* Cabeçalho institucional */}
-            <div className="mb-10">
-              <p className="text-xs font-bold uppercase tracking-[0.2em]">
-                <span className="text-red">Comissão</span>{" "}
-                <span className="text-paper">técnica</span>
-              </p>
-              <h2 className="mt-2 max-w-2xl font-display text-4xl uppercase leading-tight text-paper sm:text-5xl">
-                Quem forma os campeões de amanhã
-              </h2>
-              <span aria-hidden="true" className="mt-4 block h-1 w-12 bg-red" />
-              <p className="mt-4 max-w-xl text-paper/80">
-                Muito mais do que treinos. Uma equipe apaixonada por desenvolver atletas, cidadãos
-                e vencedores dentro e fora da quadra.
+            {/* Cabeçalho enxuto: título menor à esquerda, linha de apoio ao
+                lado no desktop (em vez de empilhada) — menos altura */}
+            <div className="mb-7 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
+              <div>
+                {/* Eyebrow em paper puro: red sobre wine fica ~2.3:1 (reprova o
+                    WCAG AA) — o acento vermelho fica na régua abaixo do título */}
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-paper">
+                  Comissão técnica
+                </p>
+                <h2 className="mt-1.5 font-display text-3xl uppercase leading-tight text-paper sm:text-4xl">
+                  Quem forma os campeões de amanhã
+                </h2>
+                <span aria-hidden="true" className="mt-3 block h-1 w-12 bg-red" />
+              </div>
+              {/* Apoio em uma linha só — curto e direto */}
+              <p className="max-w-xs pb-1 text-sm text-paper/80">
+                Uma equipe apaixonada por formar atletas, dentro e fora da quadra.
               </p>
             </div>
 
-            {/* Números da estrutura técnica (dados reais do flyer/tabela) */}
-            <dl className="mb-12 grid grid-cols-3 divide-x divide-paper/15 border-y border-paper/15">
+            {/* Faixa de estatísticas ENXUTA — número e rótulo lado a lado numa
+                linha compacta, bloco separado dos cards. Profissionais e turmas
+                derivados da data layer para nunca divergirem da grade exibida
+                (a escolinha vai até o Sub-16; Sub-18 é o time competitivo). */}
+            <dl className="mb-8 grid grid-cols-3 divide-x divide-paper/15 border-y border-paper/15 lg:mb-10">
               {[
-                { numero: "05", rotulo: "Profissionais em quadra" },
-                { numero: "06", rotulo: "Categorias, do Sub-8 ao Sub-18" },
+                {
+                  numero: String(professores.length).padStart(2, "0"),
+                  rotulo: "Profissionais em quadra",
+                },
+                {
+                  numero: String(turmas.length).padStart(2, "0"),
+                  rotulo: "Turmas ativas, do Sub-8 ao Sub-16",
+                },
                 { numero: "03", rotulo: "Certificações: CREF, CBFS e FPFS" },
               ].map((stat) => (
-                <div key={stat.rotulo} className="px-2 py-5 text-center sm:px-4 sm:py-6">
+                <div
+                  key={stat.rotulo}
+                  className="flex flex-col items-center justify-center gap-x-3 gap-y-0.5 px-2 py-3 text-center sm:flex-row sm:text-left"
+                >
                   <dt className="sr-only">{stat.rotulo}</dt>
-                  <dd>
-                    <span className="font-display block text-3xl text-paper sm:text-5xl">
+                  <dd className="contents">
+                    <span className="font-display block text-2xl text-paper sm:text-3xl">
                       {stat.numero}
                     </span>
-                    <span className="mt-1 block text-[11px] font-bold uppercase tracking-widest text-paper/60">
+                    {/* paper/75 (não /60): 11px sobre wine precisa de 4.5:1 */}
+                    <span className="block max-w-40 text-[11px] font-bold uppercase tracking-widest text-paper/75">
                       {stat.rotulo}
                     </span>
                   </dd>
@@ -219,65 +200,75 @@ export default function EscolinhaPage() {
               ))}
             </dl>
 
-            {/* Mobile: carrossel horizontal com snap (evita empilhar 5 cards
-                de foto grande — a "salsicha"). Desktop: flex-wrap centrado —
-                com 5 membros, a última fileira fica centralizada (grid
-                deixaria um card órfão encostado à esquerda). */}
-            <ul className="-mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:pb-0">
+            {/* Cards COMPACTOS e uniformes: só a foto com nome + categorias na
+                base; citação e funções vivem num overlay que aparece no hover
+                (e no foco/toque, via tabIndex + group-focus). Uma fileira de 5
+                no desktop — fração da altura do layout antigo de cards altos.
+                Mobile: carrossel horizontal com snap, sem empilhar. */}
+            <ul className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-5">
               {professores.map((professor) => (
-                // Card "academy": foto dominante (~70%), badge discreto de
-                // categorias, nome gigante e frase pessoal no rodapé.
-                // Hover: card sobe, foto aproxima, fundo clareia.
                 <li
                   key={professor.id}
-                  className="group w-[78%] shrink-0 snap-center overflow-hidden rounded-2xl border border-paper/15 bg-ink/25 transition-[transform,border-color,background-color] duration-300 hover:-translate-y-3 hover:border-red/60 hover:bg-ink/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-[calc(50%-0.625rem)] sm:shrink lg:w-[calc(33.333%-0.9rem)]"
+                  tabIndex={0}
+                  className="group relative aspect-[3/4] w-[58%] shrink-0 snap-center overflow-hidden rounded-2xl border border-paper/15 bg-ink/25 transition-[border-color] duration-300 hover:border-red/60 focus-visible:outline-paper motion-reduce:transition-none sm:w-auto sm:shrink"
                 >
-                  <div className="relative aspect-[3/4] overflow-hidden">
-                    {professor.foto ? (
-                      <Image
-                        src={professor.foto}
-                        alt={`Foto de ${professor.nome}`}
-                        width={640}
-                        height={854}
-                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.08] motion-reduce:transition-none"
-                      />
-                    ) : (
-                      // Sem foto: iniciais em contorno vazado centralizadas
-                      <div className="relative h-full w-full bg-ink/20">
-                        <span
-                          aria-hidden="true"
-                          className="font-display absolute inset-0 flex items-center justify-center text-[7rem] uppercase leading-none text-transparent opacity-20 [-webkit-text-stroke:2px_var(--color-paper)]"
-                        >
-                          {professor.nome.slice(0, 2)}
-                        </span>
-                      </div>
-                    )}
-                    {/* Gradiente ink na base da foto — ancora badge e nome */}
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent"
+                  {professor.foto ? (
+                    // Enquadramento original (nenhum corte: em várias fotos a
+                    // cabeça encosta no topo do quadro) — o logo de patrocinador
+                    // do fundo é tratado na própria imagem (desfoque)
+                    <Image
+                      src={professor.foto}
+                      alt={`Foto de ${professor.nome}`}
+                      width={640}
+                      height={854}
+                      className="absolute inset-0 h-full w-full object-cover object-top"
                     />
-                    {/* Badge discreto de categorias (CREF entra aqui quando houver) */}
-                    <p className="absolute left-5 bottom-16 text-[11px] font-bold uppercase tracking-[0.2em] text-red sm:bottom-[4.5rem]">
+                  ) : (
+                    // Sem foto: iniciais em contorno vazado centralizadas
+                    <span
+                      aria-hidden="true"
+                      className="font-display absolute inset-0 flex items-center justify-center text-[5rem] uppercase leading-none text-transparent opacity-20 [-webkit-text-stroke:2px_var(--color-paper)]"
+                    >
+                      {professor.nome.slice(0, 2)}
+                    </span>
+                  )}
+                  {/* Véu escuro no topo — uniformiza o alto das fotos */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-0 top-0 h-1/5 bg-gradient-to-b from-ink/70 to-transparent"
+                  />
+                  {/* Gradiente ink na base — ancora nome e categorias */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-4">
+                    {/* paper/90, não red: contraste AA sobre o gradiente escuro */}
+                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-paper/90">
                       {professor.cref ?? professor.categorias}
                     </p>
-                    {/* Nome gigante, estilo elenco profissional */}
-                    <h3 className="absolute bottom-4 left-5 right-5 font-display text-4xl uppercase leading-none text-paper sm:text-[2.75rem]">
+                    <h3 className="mt-0.5 font-display text-2xl uppercase leading-none text-paper">
                       {professor.nome}
                     </h3>
                   </div>
-                  <div className="p-6 pt-5">
-                    {/* Frase pessoal — o lado humano do treinador */}
-                    <blockquote className="border-l-2 border-red pl-4 text-sm italic leading-relaxed text-paper/90">
+                  {/* Overlay de detalhes — hover/foco: citação + funções */}
+                  <div className="absolute inset-0 flex flex-col justify-end gap-3 bg-wine/95 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 group-focus:opacity-100 motion-reduce:transition-none">
+                    <h3 className="font-display text-2xl uppercase leading-none text-paper">
+                      {professor.nome}
+                    </h3>
+                    <blockquote className="border-l-2 border-red pl-3 text-sm italic leading-snug text-paper/90">
                       &ldquo;{professor.frase}&rdquo;
                     </blockquote>
-                    <ul className="mt-4 space-y-1.5">
+                    <ul className="space-y-1">
                       {professor.credenciais.map((credencial) => (
                         <li
                           key={credencial}
-                          className="flex items-baseline gap-2 text-[13px] font-semibold text-paper/70"
+                          className="flex items-baseline gap-2 text-xs font-semibold text-paper/80"
                         >
-                          <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-red" />
+                          <span
+                            aria-hidden="true"
+                            className="h-1 w-1 shrink-0 rounded-full bg-red"
+                          />
                           {credencial}
                         </li>
                       ))}
@@ -286,16 +277,25 @@ export default function EscolinhaPage() {
                 </li>
               ))}
             </ul>
-            {/* Pista de deslize — só no mobile, onde o carrossel existe */}
-            <p
-              aria-hidden="true"
-              className="mt-1 text-[11px] font-bold uppercase tracking-widest text-paper/40 sm:hidden"
-            >
-              Deslize para conhecer a comissão →
+            {/* Pista de interação: deslize no mobile, hover/toque nos cards */}
+            <p className="mt-2 text-[11px] font-bold uppercase tracking-widest text-paper/50">
+              <span className="sm:hidden">Deslize e toque num card para os detalhes →</span>
+              <span className="hidden sm:inline">
+                Passe o mouse sobre um card para ver os detalhes
+              </span>
             </p>
           </div>
         </section>
       </Reveal>
+
+      {/* Descanso visual entre os dois blocos escuros (comissão → Estágio 03):
+          faixa clara de "quebra de capítulo" com o brasão entre dois traços —
+          o respiro que padding sozinho não cria entre fundos da mesma cor */}
+      <div aria-hidden="true" className="flex items-center justify-center gap-5 bg-paper py-10 sm:py-12">
+        <span className="h-px w-14 bg-red/50 sm:w-20" />
+        <Image src="/brasao.webp" alt="" width={515} height={515} className="h-12 w-12 sm:h-14 sm:w-14" />
+        <span className="h-px w-14 bg-red/50 sm:w-20" />
+      </div>
 
       {/* Ponte para o time — fecha a narrativa aberta no hero: a página começa
           no "Estágio 01" e aponta o "Estágio 03". Duas colunas: texto e CTAs à
@@ -307,13 +307,15 @@ export default function EscolinhaPage() {
             texto) escurecendo até o ink só no canto da foto — clima de noite
             de jogo sem deixar o preto dominar. Diferencia da seção wine da
             comissão logo acima. */}
-        <section className="relative overflow-hidden border-t-2 border-red bg-gradient-to-br from-red-ink via-wine to-ink">
+        {/* Degradê começa no MESMO wine da comissão acima: a divisória vermelha
+            fica entre dois tons contínuos — transição suave, não corte seco */}
+        <section className="relative overflow-hidden border-t-2 border-red bg-gradient-to-br from-wine via-red-ink to-ink">
           {/* Luz vermelha radial atrás da foto */}
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-[radial-gradient(ellipse_80%_90%_at_85%_50%,rgba(228,20,27,0.35),transparent_65%)]"
           />
-          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:py-20 lg:grid-cols-2 lg:gap-14">
+          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 sm:py-28 lg:grid-cols-2 lg:gap-14">
             <div>
               <p className="inline-block bg-red px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-paper shadow-md">
                 Estágio 03 · Competição
@@ -386,7 +388,7 @@ export default function EscolinhaPage() {
       {/* Faixa final de conversão — depois da confiança das famílias, o convite */}
       <Reveal>
         <section className="border-t-2 border-red bg-red text-paper">
-          <div className="mx-auto max-w-6xl px-4 py-14 text-center">
+          <div className="mx-auto max-w-6xl px-4 py-16 text-center sm:py-20">
             <h2 className="font-display mx-auto max-w-2xl text-3xl uppercase leading-tight sm:text-4xl">
               Seu filho também pode começar essa história.
             </h2>

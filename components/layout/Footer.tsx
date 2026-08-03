@@ -121,8 +121,10 @@ export function Footer() {
             height={224}
             className="h-auto w-32 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-44"
           />
+          {/* Frase de fechamento própria — o slogan "Da base ao time" já mora
+              na hero e no splash; repetir aqui seria a 3ª vez */}
           <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-paper/70">
-            Da base ao time. Uma só jornada.
+            É aqui que as grandes histórias começam.
           </p>
         </div>
 

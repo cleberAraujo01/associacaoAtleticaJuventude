@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageBanner } from "@/components/layout/PageBanner";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { VideoGrid } from "@/components/video/VideoGrid";
@@ -22,20 +23,13 @@ export default function CanaisPage() {
 
   return (
     <>
-      <section className="bg-wine text-paper">
-        <div className="mx-auto max-w-6xl px-4 py-14">
-          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-paper/80">
-            Onde o clube acontece todo dia
-          </p>
-          <h1 className="font-display max-w-2xl text-4xl uppercase leading-tight sm:text-6xl">
-            Nossos canais
-          </h1>
-          <p className="mt-4 max-w-xl text-lg text-paper/80">
-            A {site.nomeCurto} vive além da quadra: acompanhe os jogos, os bastidores e fale com a
-            gente.
-          </p>
-        </div>
-      </section>
+      {/* Banner padrão das páginas internas (arte compartilhada do PageBanner) */}
+      <PageBanner rotulo="Onde o clube acontece todo dia" titulo="Nossos canais">
+        <p className="text-lg text-paper">
+          A {site.nomeCurto} vive além da quadra: acompanhe os jogos, os bastidores e fale com a
+          gente.
+        </p>
+      </PageBanner>
 
       {/* Cartões dos canais */}
       <section className="mx-auto max-w-6xl px-4 py-16">

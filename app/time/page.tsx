@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { PageBanner } from "@/components/layout/PageBanner";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { VideoGrid } from "@/components/video/VideoGrid";
 import { eventos, links } from "@/config/site";
@@ -33,36 +33,13 @@ export default function TimePage() {
 
   return (
     <>
-      {/* Cabeçalho da trilha — fundo vinho (secundário da paleta) */}
-      <section className="bg-wine text-paper">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-8 px-4 py-14">
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-paper/80">
-              Estágio 03 · Competição · FPFS
-            </p>
-            <h1 className="font-display max-w-2xl text-4xl uppercase leading-tight sm:text-6xl">
-              O time de Santana de Parnaíba
-            </h1>
-            <p className="mt-4 max-w-xl text-lg text-paper/80">
-              Elenco Sub-18 na Federação Paulista de Futsal, com atletas formados na nossa própria
-              base.
-            </p>
-          </div>
-          {/* Brasão da federação — reforço visual da afiliação citada no texto */}
-          <div className="flex flex-col items-center gap-2">
-            <Image
-              src="/brasao-fpfs.webp"
-              alt="Brasão da Federação Paulista de Futsal"
-              width={140}
-              height={140}
-              className="h-auto w-24 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-32"
-            />
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-paper/60">
-              Filiado à FPFS
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Banner padrão das páginas internas (arte compartilhada do PageBanner) */}
+      <PageBanner rotulo="Estágio 03 · Competição · FPFS" titulo="O time de Santana de Parnaíba">
+        <p className="text-lg text-paper">
+          Elenco Sub-18 na Federação Paulista de Futsal, com atletas formados na nossa própria
+          base.
+        </p>
+      </PageBanner>
 
       {/* Agenda de jogos */}
       <section className="mx-auto max-w-6xl px-4 py-16">

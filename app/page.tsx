@@ -1,5 +1,7 @@
 import { AthletePath } from "@/components/home/AthletePath";
 import { ChannelIcon } from "@/components/ui/ChannelIcon";
+import { CtaLink } from "@/components/ui/CtaLink";
+import { FeatureStrip } from "@/components/home/FeatureStrip";
 import { Hero } from "@/components/home/Hero";
 import { ProofGrid } from "@/components/home/ProofGrid";
 import { RedesSociais } from "@/components/home/RedesSociais";
@@ -25,6 +27,10 @@ export default function HomePage() {
     <>
       <Hero />
 
+      {/* Faixa própria dos 4 selos (antes dentro da hero): respiro claro entre
+          o banner escuro e a seção vinho do trajeto */}
+      <FeatureStrip />
+
       {/* Reveal: cada seção surge com fade + deslize ao entrar na viewport */}
       <Reveal>
         <AthletePath />
@@ -41,7 +47,8 @@ export default function HomePage() {
 
       {/* Vídeos do canal (facade — iframe só carrega no clique) */}
       <Reveal>
-        <section className="mx-auto max-w-6xl px-4 py-16" aria-label="Vídeos do clube">
+        {/* py-24: mais respiro entre as faixas escuras vizinhas (redes/lema) */}
+        <section className="mx-auto max-w-6xl px-4 py-24" aria-label="Vídeos do clube">
           {/* Cabeçalho em duas colunas: título + apoio à esquerda, CTA do canal à direita */}
           <div className="flex flex-wrap items-end justify-center gap-x-8 gap-y-4 md:justify-between">
             <div>
@@ -82,16 +89,30 @@ export default function HomePage() {
             "janela" para a quadra, em todos os tamanhos. Exceção: iOS Safari
             ignora background-attachment: fixed e rola normalmente. */}
         <div className="flex min-h-72 items-center sm:min-h-96">
-          <div className="mx-auto w-full max-w-6xl px-4 py-12 text-center">
+          <div className="mx-auto w-full max-w-6xl px-4 py-14 text-center">
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-paper/80 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
               Santana de Parnaíba/SP
             </p>
+            {/* "essa camisa" com sublinhado vermelho (não texto vermelho): red
+                sobre a foto escura não alcança contraste AA — o acento fica no
+                traço, o texto segue paper */}
             <p className="mt-3 font-display text-3xl uppercase leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:text-5xl">
               O futsal daqui tem nome.
               <span className="block">
-                E veste <span className="text-red">essa camisa</span>.
+                E veste{" "}
+                <span className="underline decoration-red decoration-4 underline-offset-8">
+                  essa camisa
+                </span>
+                .
               </span>
             </p>
+            {/* A faixa agora tem função: convite direto para a escolinha
+                (o convite de parceria mora na seção logo abaixo) */}
+            <div className="mt-8 flex justify-center">
+              <CtaLink href="/escolinha" variante="claro">
+                Conheça a escolinha
+              </CtaLink>
+            </div>
           </div>
         </div>
       </section>

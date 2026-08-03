@@ -18,7 +18,9 @@ export const professores: Professor[] = [
     credenciais: ["Treinador do Sub-10 e do Sub-14", "Comanda o Sub-16 nas terças"],
     descricao:
       "Referência da quadra nas noites de terça, sexta e sábado. Trabalha o fundamento sem abrir mão do jogo.",
-    foto: "/professor-cleitinho.webp",
+    // Versão "-limpo": logo de patrocinador do painel de fundo desfocado
+    // (original preservado sem o sufixo)
+    foto: "/professor-cleitinho-limpo.webp",
   },
   {
     id: "gabriel-davanzo",
@@ -28,7 +30,7 @@ export const professores: Professor[] = [
     credenciais: ["Treinador do Sub-12 e do Sub-16", "Responsável pelos treinos personal"],
     descricao:
       "Acompanha o atleta da iniciação ao grupo que disputa a FPFS, além dos horários de personal.",
-    foto: "/professor-gabriel.webp",
+    foto: "/professor-gabriel-limpo.webp",
   },
   {
     id: "romanelli",
@@ -48,7 +50,7 @@ export const professores: Professor[] = [
     credenciais: ["Treinador de goleiros", "Atende todas as categorias"],
     descricao:
       "Cuida da posição mais solitária da quadra: técnica, posicionamento e confiança para os goleiros de todas as turmas.",
-    foto: "/professor-luizao-2.webp",
+    foto: "/professor-luizao-2-limpo.webp",
   },
   {
     id: "leandro",

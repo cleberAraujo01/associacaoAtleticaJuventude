@@ -172,6 +172,41 @@ body {
 }
 
 /*
+ * Banner de título de página (ex.: /quem-somos): a faixa vermelha entra
+ * deslizando da esquerda e o título sobe em fade — padrão "breadcrumb hero"
+ * de site de clube. A regra global de prefers-reduced-motion zera a duração.
+ */
+@keyframes banner-faixa-entrada {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes banner-titulo-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.banner-faixa {
+  animation: banner-faixa-entrada 0.6s ease-out both;
+}
+
+.banner-titulo {
+  animation: banner-titulo-entrada 0.55s ease-out 0.2s both;
+}
+
+/*
  * Reveal ao rolar (components/ui/Reveal.tsx): fade + deslize suave quando a
  * seção entra na viewport. Sem movimento para prefers-reduced-motion.
  */

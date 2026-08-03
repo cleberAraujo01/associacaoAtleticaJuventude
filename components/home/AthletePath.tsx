@@ -52,7 +52,7 @@ const passos = [
 
 export function AthletePath() {
   return (
-    <section aria-label="O trajeto do atleta" className="relative overflow-hidden bg-wine py-20">
+    <section aria-label="O trajeto do atleta" className="relative overflow-hidden bg-wine py-24">
       {/* Brasão em marca d'água no canto superior direito (referência do flyer).
           Opacidade mínima: só aparece para quem observa com atenção. */}
       <Image
@@ -84,17 +84,17 @@ export function AthletePath() {
         {/* Cabeçalho no padrão do flyer: eyebrow bicolor, título e régua
             vermelha — título maior e mais respiro antes dos cartões */}
         <div className="mb-14">
-          <p className="text-sm font-bold uppercase tracking-[0.25em]">
-            <span className="text-red">Nossa</span>{" "}
-            <span className="text-paper">jornada</span>
-          </p>
+          {/* Eyebrow em paper puro: red (#E4141B) sobre wine fica ~2.3:1 —
+              abaixo do AA. O acento vermelho fica na régua abaixo do título. */}
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-paper">Nossa jornada</p>
           <h2 className="mt-3 font-display text-5xl uppercase leading-[0.95] text-paper sm:text-6xl">
             O trajeto
             <span className="block">do atleta</span>
           </h2>
           <span aria-hidden="true" className="mt-5 block h-1 w-12 bg-red" />
+          {/* Frase institucional que saiu da hero — aqui é a casa dela */}
           <p className="mt-5 max-w-md text-paper/80">
-            Mais que formar jogadores, formamos pessoas para a vida.
+            Formamos atletas e construímos caráter, dentro e fora da quadra.
           </p>
         </div>
 
@@ -137,8 +137,11 @@ export function AthletePath() {
                 </svg>
                 <div className="relative">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-paper/80">
-                      <span className="text-red">Estágio</span> {passo.numero} · {passo.rotulo}
+                    {/* Rótulo inteiro em paper/90: a palavra "Estágio" em red
+                        sobre o cartão escuro (ink/35 + wine) fica ~3:1 — abaixo
+                        do AA para texto de 12px */}
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-paper/90">
+                      Estágio {passo.numero} · {passo.rotulo}
                     </p>
                     {/* Selo FPFS no estágio de federação — reforço visual da afiliação */}
                     {passo.destaque && (

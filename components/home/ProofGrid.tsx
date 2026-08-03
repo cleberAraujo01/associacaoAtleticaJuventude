@@ -13,7 +13,7 @@ interface ProofGridProps {
  */
 export function ProofGrid({ atletasDaBase, depoimentos }: ProofGridProps) {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16">
+    <section className="mx-auto max-w-6xl px-4 py-24">
       <SectionHeading rotulo="Prova de que funciona">Formados aqui, jogando aqui</SectionHeading>
 
       {/* Atletas que subiram da base */}
@@ -22,8 +22,10 @@ export function ProofGrid({ atletasDaBase, depoimentos }: ProofGridProps) {
           <li key={atleta.id} className="border-2 border-ink/10 bg-white p-5">
             <p className="font-display text-lg uppercase">{atleta.nome}</p>
             <p className="text-sm text-ink/70">{atleta.posicao}</p>
+            {/* bg-red-ink (não red): paper sobre o red vivo fica ~4.1:1 —
+                abaixo do AA em 12px; o red-ink existe justamente para isso */}
             {atleta.anoBase && atleta.anoSubida && (
-              <p className="mt-3 inline-block bg-red px-2 py-1 text-xs font-bold uppercase tracking-wide text-paper">
+              <p className="mt-3 inline-block bg-red-ink px-2 py-1 text-xs font-bold uppercase tracking-wide text-paper">
                 Base {atleta.anoBase} → Time {atleta.anoSubida}
               </p>
             )}

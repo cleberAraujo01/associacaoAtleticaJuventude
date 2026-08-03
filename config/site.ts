@@ -19,6 +19,7 @@ export const nav = [
   { href: "/escolinha", label: "Escolinha" },
   { href: "/time", label: "Time" },
   { href: "/da-base-ao-time", label: "Da base ao time" },
+  { href: "/quem-somos", label: "Quem somos" },
   { href: "/canais", label: "Canais" },
   // "/apoie" fora do menu principal: a captação de apoio acontece pela seção
   // de patrocinadores na home e no footer (decisão de foco do menu nas 2 trilhas).

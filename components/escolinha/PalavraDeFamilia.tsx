@@ -21,8 +21,10 @@ export function PalavraDeFamilia({ depoimentos }: PalavraDeFamiliaProps) {
   if (!atual) return null;
 
   return (
+    // border-t-2 red: divisória fina (assinatura do site) suavizando a saída
+    // do bloco escuro do Estágio 03 para esta seção clara
     <section
-      className="relative overflow-hidden border-t border-ink/10 bg-paper"
+      className="relative overflow-hidden border-t-2 border-red bg-paper"
       aria-label="Depoimentos de famílias da escolinha"
     >
       {/* Marca d'água do brasão no canto inferior direito */}
@@ -34,7 +36,7 @@ export function PalavraDeFamilia({ depoimentos }: PalavraDeFamiliaProps) {
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-20 -right-20 w-80 opacity-[0.05]"
       />
-      <div className="relative mx-auto max-w-6xl px-4 py-16">
+      <div className="relative mx-auto max-w-6xl px-4 py-20 lg:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(16rem,2fr)_3fr] lg:gap-0">
           {/* Foto + identidade da seção */}
           <div className="lg:border-r-2 lg:border-red lg:pr-10">

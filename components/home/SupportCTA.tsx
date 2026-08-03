@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChannelIcon } from "@/components/ui/ChannelIcon";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { eventos, links } from "@/config/site";
 import type { Parceiro } from "@/types";
 
 interface SupportCTAProps {
@@ -44,11 +42,11 @@ export function SupportCTA({ parceiros }: SupportCTAProps) {
 
   return (
     <section className="bg-white" aria-label="Patrocinadores e apoiadores">
-      <div className="mx-auto max-w-6xl px-4 py-16">
+      <div className="mx-auto max-w-6xl px-4 py-24">
         <SectionHeading rotulo="Sua marca no jogo">Patrocinadores e apoiadores</SectionHeading>
+        {/* Apoio encurtado: uma frase basta — o card ao lado detalha o resto */}
         <p className="-mt-4 mb-10 max-w-2xl text-center text-ink/70 md:text-left">
-          Quem apoia o Juventude entra em quadra com a gente. Cada marca aqui ajuda a manter a
-          escolinha e o time Sub-18 em movimento.
+          Quem apoia o Juventude entra em quadra com a gente.
         </p>
 
         <div className="grid items-stretch gap-8 lg:grid-cols-[1fr_minmax(20rem,24rem)]">
@@ -76,8 +74,7 @@ export function SupportCTA({ parceiros }: SupportCTAProps) {
               </p>
               <h3 className="mt-2 font-display text-3xl uppercase">Seja um parceiro</h3>
               <p className="mt-3 text-sm leading-relaxed text-paper/80">
-                Apoie a formação de atletas em Santana de Parnaíba e coloque sua marca onde a
-                cidade vê:
+                Coloque sua marca onde a cidade toda vê:
               </p>
               <ul className="mt-4 space-y-2.5">
                 {beneficios.map((beneficio) => (
@@ -101,13 +98,9 @@ export function SupportCTA({ parceiros }: SupportCTAProps) {
                 ))}
               </ul>
               <div className="mt-6 flex flex-col gap-3">
-                <CtaLink
-                  href={links.whatsappApoio}
-                  variante="vermelho"
-                  evento={eventos.saidaWhatsapp}
-                  externo
-                >
-                  <ChannelIcon canal="WhatsApp" />
+                {/* Conversão de apoio via página de contato (formulário),
+                    não mais direto no WhatsApp */}
+                <CtaLink href="/contato" variante="vermelho">
                   Quero apoiar o clube
                 </CtaLink>
                 <Link

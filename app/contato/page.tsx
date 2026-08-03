@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contato/ContactForm";
+import { PageBanner } from "@/components/layout/PageBanner";
 import { ChannelIcon } from "@/components/ui/ChannelIcon";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -44,42 +45,25 @@ const assuntos = [
 export default function ContatoPage() {
   return (
     <>
-      {/* Hero: vinho + textura de polígonos, serigrafia na segunda linha
-          (assinatura visual do site) e monograma decorativo ao fundo */}
-      <section className="relative overflow-hidden bg-wine text-paper">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[url('/fundo-poligonos.webp')] bg-cover bg-center opacity-30"
-        />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-wine/60 to-ink/60" />
-        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-20">
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-paper/80">
-            Fale com o Juventude · {site.cidade}
-          </p>
-          <h1 className="font-display max-w-3xl text-5xl uppercase leading-[0.95] sm:text-6xl">
-            O primeiro passe para um grande futuro{" "}
-            <span className="block text-transparent [-webkit-text-stroke:2px_var(--color-paper)]">
-              começa aqui.
-            </span>
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-paper/85">
-            Matrículas pelo WhatsApp. Parcerias, patrocínio e imprensa pelo formulário.
-          </p>
-          {/* Sem CTA aqui — os atalhos por assunto logo abaixo são a ação da página */}
-          <a
-            href="#assuntos"
-            className="group mt-8 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-paper/90 transition-colors hover:text-paper focus-visible:outline-paper"
+      {/* Banner padrão das páginas internas (arte compartilhada do PageBanner) */}
+      <PageBanner rotulo={`Fale com o Juventude · ${site.cidade}`} titulo="Contato">
+        <p className="text-lg text-paper">
+          Matrículas pelo WhatsApp. Parcerias, patrocínio e imprensa pelo formulário.
+        </p>
+        {/* Sem CTA aqui — os atalhos por assunto logo abaixo são a ação da página */}
+        <a
+          href="#assuntos"
+          className="group mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-paper/90 transition-colors hover:text-paper focus-visible:outline-paper"
+        >
+          Escolher o assunto{" "}
+          <span
+            aria-hidden="true"
+            className="inline-block transition-transform group-hover:translate-y-0.5 motion-reduce:transition-none"
           >
-            Escolher o assunto{" "}
-            <span
-              aria-hidden="true"
-              className="inline-block transition-transform group-hover:translate-y-0.5 motion-reduce:transition-none"
-            >
-              ↓
-            </span>
-          </a>
-        </div>
-      </section>
+            ↓
+          </span>
+        </a>
+      </PageBanner>
 
       {/* Atalhos por assunto + formulário lado a lado no desktop */}
       <section id="assuntos" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16">
