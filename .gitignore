@@ -19,6 +19,8 @@ next-env.d.ts
 
 .vercel
 .env*
+# .env.example é documentação (sem segredos) — versionado
+!.env.example
 
 # Ferramentas locais do Claude Code (skills)
 .claude/

@@ -1,12 +1,17 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
-import { links } from "@/config/site";
+import nodemailer from "nodemailer";
+import { links, site } from "@/config/site";
+import { htmlConfirmacaoVisitante, textoNotificacaoClube } from "@/lib/emails";
 
 /**
- * POST /api/contato — envia a mensagem do formulário de contato por e-mail
- * via Resend (integração Vercel Marketplace; RESEND_API_KEY e
- * RESEND_EMAIL_DOMAIN são provisionadas pela integração).
- * O reply-to é o e-mail do visitante, para o clube responder direto.
+ * POST /api/contato — solução própria de envio, sem serviço externo pago:
+ * SMTP do Gmail do clube via nodemailer (GMAIL_USER + GMAIL_APP_PASSWORD,
+ * senha de app gerada na conta Google com verificação em 2 etapas).
+ * Dois e-mails por mensagem:
+ *  1. Notificação para o clube, com reply-to do visitante (responder direto).
+ *  2. Confirmação estilizada para o visitante (lib/emails.ts), com o brasão
+ *     anexado por CID — a imagem é buscada no próprio site (origin da request),
+ *     o que funciona igual em dev e em produção.
  */
 export async function POST(req: Request) {
   let dados: unknown;
@@ -39,21 +44,59 @@ export async function POST(req: Request) {
     );
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const { error } = await resend.emails.send({
-    from: `AA Juventude — Site <site@${process.env.RESEND_EMAIL_DOMAIN}>`,
-    to: links.email,
-    replyTo: email,
-    subject: `[Site] ${assunto} — ${nome}`,
-    text: `${mensagem}\n\n—\nNome: ${nome}\nE-mail: ${email}\nAssunto: ${assunto}`,
-  });
-
-  if (error) {
-    console.error("Falha ao enviar contato via Resend:", error);
+  const usuario = process.env.GMAIL_USER;
+  const senhaApp = process.env.GMAIL_APP_PASSWORD;
+  if (!usuario || !senhaApp) {
+    console.error("Contato: GMAIL_USER/GMAIL_APP_PASSWORD ausentes no ambiente.");
     return NextResponse.json(
       { erro: "Não foi possível enviar agora. Tente novamente ou use o e-mail direto." },
       { status: 502 },
     );
+  }
+
+  const transporte = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: { user: usuario, pass: senhaApp },
+  });
+
+  const contato = { nome, email, assunto, mensagem };
+
+  // 1) Notificação para o clube — se esta falhar, o envio falhou de verdade
+  try {
+    await transporte.sendMail({
+      from: `"${site.nomeCurto} (site)" <${usuario}>`,
+      to: links.email,
+      replyTo: email,
+      subject: `[Site] ${assunto}: ${nome}`,
+      text: textoNotificacaoClube(contato),
+    });
+  } catch (erro) {
+    console.error("Falha ao enviar contato via Gmail:", erro);
+    return NextResponse.json(
+      { erro: "Não foi possível enviar agora. Tente novamente ou use o e-mail direto." },
+      { status: 502 },
+    );
+  }
+
+  // 2) Confirmação para o visitante — falha aqui não derruba o sucesso acima
+  try {
+    await transporte.sendMail({
+      from: `"${site.nomeCurto}" <${usuario}>`,
+      to: email,
+      subject: "Recebemos sua mensagem! AA Juventude",
+      html: htmlConfirmacaoVisitante(contato),
+      attachments: [
+        {
+          filename: "brasao.png",
+          path: `${new URL(req.url).origin}/brasao-footer.png`,
+          cid: "brasao",
+        },
+      ],
+    });
+  } catch (erro) {
+    console.error("Contato enviado, mas a confirmação ao visitante falhou:", erro);
   }
 
   return NextResponse.json({ ok: true });

@@ -15,7 +15,8 @@ interface Erros {
 
 /**
  * Formulário de contato para imprensa e assuntos institucionais.
- * Envio real via POST /api/contato (Resend, integração Vercel Marketplace).
+ * Envio real via POST /api/contato (SMTP do Gmail do clube via nodemailer);
+ * o visitante recebe um e-mail de confirmação estilizado (lib/emails.ts).
  * Validação client-side com erros inline (noValidate: mensagens nossas, não as
  * do navegador). Fallbacks visíveis: mailto com a mensagem pronta e "copiar
  * e-mail" — cobrem indisponibilidade da API ou preferência do visitante.
@@ -31,7 +32,7 @@ export function ContactForm() {
 
   const rotuloClasse = "block text-xs font-bold uppercase tracking-widest text-ink";
   const campoClasse = (temErro: boolean) =>
-    `mt-2 w-full border-2 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:outline-none ${
+    `mt-2 w-full rounded-xl border-2 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:outline-none ${
       temErro ? "border-red" : "border-ink/15 focus:border-red"
     }`;
   const erroClasse = "mt-1.5 text-xs font-semibold text-red-ink";
@@ -183,7 +184,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "enviando"}
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 bg-red px-6 py-3.5 text-sm font-bold uppercase tracking-widest text-paper shadow-md transition-all hover:bg-red-ink hover:shadow-lg focus-visible:outline-ink disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-red px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-paper shadow-md transition-all hover:bg-red-ink hover:shadow-lg focus-visible:outline-ink disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {status === "enviando" ? "Enviando…" : "Enviar mensagem"}
       </button>
@@ -191,12 +192,13 @@ export function ContactForm() {
       {/* Feedback de sucesso/erro do envio */}
       <div aria-live="polite">
         {status === "sucesso" && (
-          <p className="mt-4 border-2 border-green-700/30 bg-green-50 px-4 py-3 text-sm font-semibold text-green-800">
-            Mensagem enviada! Respondemos no e-mail que você informou.
+          <p className="mt-4 rounded-xl border-2 border-green-700/30 bg-green-50 px-4 py-3 text-sm font-semibold text-green-800">
+            Mensagem enviada! Você vai receber uma confirmação no seu e-mail e em breve a gente
+            entra em contato.
           </p>
         )}
         {status === "erro" && (
-          <p className="mt-4 border-2 border-red/30 bg-red/5 px-4 py-3 text-sm font-semibold text-red-ink">
+          <p className="mt-4 rounded-xl border-2 border-red/30 bg-red/5 px-4 py-3 text-sm font-semibold text-red-ink">
             Não foi possível enviar agora. Tente de novo em instantes ou use o e-mail direto logo
             abaixo.
           </p>

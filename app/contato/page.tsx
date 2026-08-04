@@ -70,13 +70,13 @@ export default function ContatoPage() {
         <div className="grid gap-12 lg:grid-cols-[2fr_3fr] lg:gap-16">
           <Reveal>
             <SectionHeading rotulo="Por assunto">Direto ao ponto</SectionHeading>
-            <ul className="border-t-2 border-ink/10">
+            <ul className="space-y-4">
               {assuntos.map((item) => (
-                <li key={item.titulo} className="border-b-2 border-ink/10">
+                <li key={item.titulo}>
                   <a
                     href={item.href}
                     {...(item.externo ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className={`group flex items-center gap-4 py-5 ${item.evento}`}
+                    className={`group flex items-center gap-4 rounded-2xl border-2 border-ink/10 bg-white p-5 transition-[border-color,box-shadow] duration-300 hover:border-red/50 hover:shadow-[0_10px_30px_rgba(14,14,16,0.08)] motion-reduce:transition-none ${item.evento}`}
                   >
                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red text-paper transition-colors group-hover:bg-red-ink">
                       {item.icone ? (
@@ -131,7 +131,7 @@ export default function ContatoPage() {
           {/* Formulário em painel "súmula": barra vermelha no topo + borda ink */}
           <Reveal atraso={100}>
             <div id="formulario" className="scroll-mt-24">
-              <div className="border-2 border-ink/10 bg-white">
+              <div className="overflow-hidden rounded-2xl border-2 border-ink/10 bg-white">
                 <div aria-hidden="true" className="h-2 bg-red" />
                 <div className="p-6 sm:p-8">
                   <SectionHeading rotulo="Parcerias, patrocínio e imprensa">
@@ -161,14 +161,14 @@ export default function ContatoPage() {
             Abrir no Google Maps →
           </a>
         </div>
-        <div className="mt-6 border-2 border-ink/10 bg-white p-2">
+        <div className="mt-6 overflow-hidden rounded-2xl border-2 border-ink/10 bg-white p-2">
           <iframe
             src={links.mapsEmbed}
             title={`Mapa — ${site.nome}`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
-            className="h-80 w-full grayscale"
+            className="h-80 w-full rounded-xl grayscale"
           />
         </div>
         </Reveal>
