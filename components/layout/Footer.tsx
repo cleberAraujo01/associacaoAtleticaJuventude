@@ -114,6 +114,7 @@ export function Footer() {
             alt={`Brasão da ${site.nome}`}
             width={224}
             height={224}
+            sizes="(min-width: 640px) 11rem, 8rem"
             className="h-auto w-32 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] sm:w-44"
           />
           {/* Frase de fechamento própria — o slogan "Da base ao time" já mora

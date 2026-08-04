@@ -32,8 +32,14 @@ export function PageBanner({
   posicao = "center",
   children,
 }: PageBannerProps) {
+  // A foto entra por background-image (CSS), então o navegador só a descobre
+  // tarde — o preload adianta o download e melhora o LCP das páginas internas.
+  // React 19 iça o <link> para o <head> automaticamente.
+  const capa = imagens && imagens.length > 0 ? imagens[0] : imagem;
+
   return (
     <section className="relative overflow-hidden bg-red text-paper">
+      <link rel="preload" as="image" href={capa} />
       {/* Foto em camada própria com o zoom-out lento de abertura (hero-zoom,
           o mesmo da home) — anima só a imagem, sem mexer no texto. A escala
           inicial de 1.1 nunca revela borda porque a camada cobre a seção.

@@ -92,6 +92,7 @@ export function Header() {
             width={120}
             height={120}
             priority
+            sizes="(min-width: 640px) 8rem, 6rem"
             className="absolute top-4 z-50 h-24 w-24 rounded-full bg-white p-1.5 drop-shadow-lg sm:h-32 sm:w-32"
           />
           <span aria-hidden="true" className="w-24 sm:w-32" />

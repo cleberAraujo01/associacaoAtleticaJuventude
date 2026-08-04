@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contato/ContactForm";
+import { MapaLocal } from "@/components/contato/MapaLocal";
 import { PageBanner } from "@/components/layout/PageBanner";
 import { ChannelIcon } from "@/components/ui/ChannelIcon";
 import { Reveal } from "@/components/ui/Reveal";
@@ -161,15 +162,9 @@ export default function ContatoPage() {
             Abrir no Google Maps →
           </a>
         </div>
+        {/* Fachada: o embed do Google Maps (~450 KB de JS) só carrega ao clique */}
         <div className="mt-6 overflow-hidden rounded-2xl border-2 border-ink/10 bg-white p-2">
-          <iframe
-            src={links.mapsEmbed}
-            title={`Mapa — ${site.nome}`}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-            className="h-80 w-full rounded-xl grayscale"
-          />
+          <MapaLocal />
         </div>
         </Reveal>
       </section>

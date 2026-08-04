@@ -49,8 +49,10 @@ export function TickerMarquee({ prefixo, local, mapaUrl, extras = [] }: TickerMa
 
   return (
     <aside aria-label="Próximo jogo do time" className="flex items-stretch bg-ink text-paper">
-      {/* Selo fixo — não rola junto: quem bate o olho sabe do que se trata */}
-      <p className="z-10 flex shrink-0 items-center gap-2 bg-red px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-paper">
+      {/* Selo fixo — não rola junto: quem bate o olho sabe do que se trata.
+          bg-red-ink (não red): texto de 10px sobre red puro fica abaixo do
+          contraste AA de 4.5:1 — o vermelho-tinta passa com folga. */}
+      <p className="z-10 flex shrink-0 items-center gap-2 bg-red-ink px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-paper">
         {/* Ponto pulsante, linguagem de "ao vivo" (some com reduced-motion) */}
         <span aria-hidden="true" className="relative flex h-1.5 w-1.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-paper opacity-75 motion-reduce:hidden" />
