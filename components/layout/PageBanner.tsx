@@ -40,16 +40,16 @@ export function PageBanner({
   return (
     <section className="relative overflow-hidden bg-red text-paper">
       <link rel="preload" as="image" href={capa} fetchPriority="high" />
-      {/* Foto em camada própria com o zoom-out lento de abertura (hero-zoom,
-          o mesmo da home) — anima só a imagem, sem mexer no texto. A escala
-          inicial de 1.1 nunca revela borda porque a camada cobre a seção.
-          Com `imagens`, a camada vira slideshow com crossfade. */}
+      {/* Foto em camada própria, estática: o zoom-out lento (hero-zoom) ficou
+          só na hero da home — nas internas ele segurava o LCP (~1,8s de atraso
+          de renderização) e o Speed Index no Lighthouse, porque a imagem só
+          "assenta" no fim da animação. Com `imagens`, vira slideshow. */}
       {imagens && imagens.length > 0 ? (
         <BannerSlides imagens={imagens} posicao={posicao} />
       ) : (
         <div
           aria-hidden="true"
-          className="hero-zoom absolute inset-0 bg-cover"
+          className="absolute inset-0 bg-cover"
           style={{ backgroundImage: `url('${imagem}')`, backgroundPosition: posicao }}
         />
       )}
