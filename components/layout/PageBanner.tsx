@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { BannerSlides } from "@/components/layout/BannerSlides";
 
@@ -32,25 +33,27 @@ export function PageBanner({
   posicao = "center",
   children,
 }: PageBannerProps) {
-  // A foto entra por background-image (CSS), então o navegador só a descobre
-  // tarde — o preload adianta o download e melhora o LCP das páginas internas.
-  // React 19 iça o <link> para o <head> automaticamente.
-  const capa = imagens && imagens.length > 0 ? imagens[0] : imagem;
-
   return (
     <section className="relative overflow-hidden bg-red text-paper">
-      <link rel="preload" as="image" href={capa} fetchPriority="high" />
-      {/* Foto em camada própria, estática: o zoom-out lento (hero-zoom) ficou
-          só na hero da home — nas internas ele segurava o LCP (~1,8s de atraso
-          de renderização) e o Speed Index no Lighthouse, porque a imagem só
-          "assenta" no fim da animação. Com `imagens`, vira slideshow. */}
+      {/* Foto em camada própria, estática — é o LCP das páginas internas, por
+          isso next/image com fill + priority (descoberta imediata no HTML,
+          prioridade alta e variante redimensionada/comprimida por tela) em vez
+          de background-image CSS, que o preload scanner não enxerga. O zoom
+          lento (hero-zoom) ficou só na hero da home: nas internas ele segurava
+          LCP e Speed Index. Com `imagens`, a camada vira slideshow. */}
       {imagens && imagens.length > 0 ? (
         <BannerSlides imagens={imagens} posicao={posicao} />
       ) : (
-        <div
+        <Image
+          src={imagem}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          quality={60}
           aria-hidden="true"
-          className="absolute inset-0 bg-cover"
-          style={{ backgroundImage: `url('${imagem}')`, backgroundPosition: posicao }}
+          className="object-cover"
+          style={{ objectPosition: posicao }}
         />
       )}
       {/* Overlay em duas camadas: gradiente lateral (mais escuro atrás da
