@@ -30,7 +30,7 @@ const passos = [
     titulo: "Cresce jogando",
     texto: "Evolui de turma em turma, disputa festivais e amistosos, vira atleta.",
     destaque: false,
-    href: "/da-base-ao-time",
+    href: "/escolinha",
     cta: "Acompanhar o processo",
     evento: "",
     // Gráfico de evolução em alta
@@ -215,10 +215,10 @@ export function AthletePath() {
             </p>
           </div>
           <Link
-            href="/da-base-ao-time"
+            href="/time"
             className={`group inline-flex items-center gap-2.5 rounded-full bg-red px-6 py-3 text-xs font-bold uppercase tracking-widest text-paper transition-colors hover:bg-red-ink focus-visible:outline-paper ${eventos.ponteBaseTime}`}
           >
-            Ver histórias de atletas
+            Acompanhar o time na FPFS
             <span
               aria-hidden="true"
               className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"

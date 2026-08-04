@@ -49,17 +49,22 @@ export function getDepoimentosDaPonte(): Depoimento[] {
   return [...depoimentos].sort((a, b) => Number(b.contaAPonte) - Number(a.contaAPonte));
 }
 
+/** Rodada já disputada = tem placar geral OU placares por categoria. */
+function temResultado(jogo: Jogo): boolean {
+  return jogo.placar !== undefined || (jogo.placares !== undefined && jogo.placares.length > 0);
+}
+
 /** Jogos futuros, do mais próximo ao mais distante. */
 export function getProximosJogos(): Jogo[] {
   const hoje = new Date().toISOString().slice(0, 10);
   return jogos
-    .filter((j) => j.placar === undefined && j.data >= hoje)
+    .filter((j) => !temResultado(j) && j.data >= hoje)
     .sort((a, b) => a.data.localeCompare(b.data));
 }
 
 /** Resultados já disputados, do mais recente ao mais antigo. */
 export function getResultados(): Jogo[] {
-  return jogos.filter((j) => j.placar !== undefined).sort((a, b) => b.data.localeCompare(a.data));
+  return jogos.filter(temResultado).sort((a, b) => b.data.localeCompare(a.data));
 }
 
 /** Próximo jogo do time (destaque no ticker e na página do time). */

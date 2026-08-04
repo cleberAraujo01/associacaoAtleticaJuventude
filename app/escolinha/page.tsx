@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { PageBanner } from "@/components/layout/PageBanner";
 import { PalavraDeFamilia } from "@/components/escolinha/PalavraDeFamilia";
 import { CtaLink } from "@/components/ui/CtaLink";
@@ -35,7 +34,15 @@ export default function EscolinhaPage() {
           título, mantém a linha de apoio e o CTA de matrícula acima da dobra.
           Sub-16, não Sub-18: a escolinha treina até o Sub-16 — o Sub-18 é o
           time competitivo (Estágio 03) e só é citado naquele contexto. */}
-      <PageBanner rotulo="Estágio 01 · Iniciação" titulo="Aqui o seu filho vira atleta">
+      <PageBanner
+        rotulo="Estágio 01 · Iniciação"
+        titulo="Aqui o seu filho vira atleta"
+        imagens={[
+          "/banner-escolinha-1.webp",
+          "/banner-escolinha-2.webp",
+          "/banner-escolinha-3.webp",
+        ]}
+      >
         <p className="text-lg text-paper">
           Do Sub-8 ao Sub-16, três treinos por semana com quem forma jogador de verdade.
         </p>
@@ -336,19 +343,6 @@ export default function EscolinhaPage() {
                 <CtaLink href="/time" variante="vermelho" evento={eventos.ponteBaseTime}>
                   Conhecer o time
                 </CtaLink>
-                {/* Rota alternativa: as histórias de quem já fez a jornada */}
-                <Link
-                  href="/da-base-ao-time"
-                  className={`group text-sm font-bold uppercase tracking-widest text-paper/90 transition-colors hover:text-paper ${eventos.ponteBaseTime}`}
-                >
-                  Ver histórias de atletas{" "}
-                  <span
-                    aria-hidden="true"
-                    className="inline-block transition-transform group-hover:translate-x-1"
-                  >
-                    →
-                  </span>
-                </Link>
               </div>
             </div>
 

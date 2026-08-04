@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageBanner } from "@/components/layout/PageBanner";
+import { CarrosselCategorias } from "@/components/time/CarrosselCategorias";
+import { MatchCard } from "@/components/time/MatchCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { VideoGrid } from "@/components/video/VideoGrid";
 import { eventos, links } from "@/config/site";
-import {
-  formatarData,
-  getAtletas,
-  getProximosJogos,
-  getResultados,
-  getVideos,
-} from "@/lib/content";
+import { getProximosJogos, getResultados, getVideos } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Time Sub-18",
@@ -26,7 +22,6 @@ export const metadata: Metadata = {
 export default function TimePage() {
   const proximos = getProximosJogos();
   const resultados = getResultados();
-  const elenco = getAtletas();
   const videosDoTime = getVideos()
     .filter((v) => v.estagio === "time")
     .slice(0, 3);
@@ -45,21 +40,10 @@ export default function TimePage() {
       <section className="mx-auto max-w-6xl px-4 py-16">
         <SectionHeading rotulo="Agenda">Próximos jogos</SectionHeading>
         {proximos.length > 0 ? (
-          <ul className="divide-y divide-ink/10 border-y border-ink/10">
+          <ul className="grid gap-4 md:grid-cols-2">
             {proximos.map((jogo) => (
-              <li key={jogo.id} className="flex flex-wrap items-baseline gap-x-6 gap-y-1 py-4">
-                <span className="font-display text-xl uppercase">
-                  {jogo.mandante
-                    ? `Juventude x ${jogo.adversario}`
-                    : `${jogo.adversario} x Juventude`}
-                </span>
-                <span className="text-sm font-semibold text-red-ink">
-                  {formatarData(jogo.data)}
-                  {jogo.horario ? ` · ${jogo.horario}` : ""}
-                </span>
-                <span className="text-sm text-ink/60">
-                  {jogo.local} · {jogo.campeonato}
-                </span>
+              <li key={jogo.id}>
+                <MatchCard jogo={jogo} />
               </li>
             ))}
           </ul>
@@ -72,37 +56,25 @@ export default function TimePage() {
       {resultados.length > 0 && (
         <section className="mx-auto max-w-6xl px-4 pb-16">
           <SectionHeading rotulo="Campanha">Últimos resultados</SectionHeading>
-          <ul className="divide-y divide-ink/10 border-y border-ink/10">
+          <ul className="grid gap-4 md:grid-cols-2">
             {resultados.map((jogo) => (
-              <li key={jogo.id} className="flex flex-wrap items-baseline gap-x-6 gap-y-1 py-4">
-                <span className="font-display text-xl uppercase">
-                  Juventude {jogo.placar?.juventude} x {jogo.placar?.adversario} {jogo.adversario}
-                </span>
-                <span className="text-sm text-ink/60">
-                  {formatarData(jogo.data)} · {jogo.campeonato}
-                </span>
+              <li key={jogo.id}>
+                <MatchCard jogo={jogo} passado />
               </li>
             ))}
           </ul>
         </section>
       )}
 
-      {/* Elenco — selo vermelho destaca quem veio da base (prova da ponte) */}
-      <section className="mx-auto max-w-6xl px-4 pb-16">
-        <SectionHeading rotulo="Elenco">Quem veste a camisa</SectionHeading>
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {elenco.map((atleta) => (
-            <li key={atleta.id} className="border-2 border-ink/10 bg-white p-5">
-              <h3 className="font-display text-lg uppercase">{atleta.nome}</h3>
-              <p className="text-sm text-ink/70">{atleta.posicao}</p>
-              {atleta.veioDaBase && (
-                <p className="mt-3 inline-block bg-red px-2 py-1 text-xs font-bold uppercase tracking-wide text-paper">
-                  Formado na base
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
+      {/* Fotos oficiais das categorias que disputam a Federação — carrossel
+          de largura cheia com snap nativo (o componente escapa do max-w-6xl) */}
+      <section className="overflow-hidden pb-16">
+        <div className="mx-auto max-w-6xl px-4">
+          <SectionHeading rotulo="Federação Paulista de Futsal">
+            As categorias que vestem o manto
+          </SectionHeading>
+        </div>
+        <CarrosselCategorias />
       </section>
 
       {/* Vídeos do time */}
