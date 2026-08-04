@@ -156,7 +156,7 @@ export function CarrosselCategorias() {
             onClick={() => irPara(indice)}
             className={`px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 [clip-path:polygon(8%_0,100%_0,92%_100%,0_100%)] ${
               indice === ativo
-                ? "bg-red text-paper"
+                ? "bg-red text-white"
                 : "bg-ink/10 text-ink/60 hover:bg-ink/20 hover:text-ink"
             }`}
           >

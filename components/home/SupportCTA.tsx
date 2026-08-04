@@ -133,7 +133,7 @@ function CardParceiro({ parceiro, principal }: { parceiro: Parceiro; principal?:
   const conteudo = (
     <>
       {principal && (
-        <span className="absolute right-4 top-4 rounded-full bg-red px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-paper">
+        <span className="absolute right-4 top-4 rounded-full bg-red px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
           Patrocinador oficial
         </span>
       )}

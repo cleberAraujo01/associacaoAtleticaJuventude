@@ -49,7 +49,7 @@ export function MapaLocal() {
         <button
           type="button"
           onClick={() => setCarregado(true)}
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-red px-6 py-3 text-sm font-bold uppercase tracking-widest text-paper shadow-md transition-all hover:bg-red-ink hover:shadow-lg"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-red px-6 py-3 text-sm font-bold uppercase tracking-widest text-white shadow-md transition-all hover:bg-red-ink hover:shadow-lg"
         >
           Carregar mapa
         </button>

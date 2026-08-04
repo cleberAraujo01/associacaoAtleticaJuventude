@@ -101,13 +101,13 @@ export default function TimePage() {
           <h2 className="text-center font-display text-3xl uppercase md:text-left">
             Todo elenco começa em algum lugar
           </h2>
-          <p className="mt-2 max-w-xl text-paper/90">
+          <p className="mt-2 max-w-xl text-white">
             O nosso começa na escolinha. Matricule quem você ama e faça parte dessa jornada.
           </p>
           <div className="mt-6">
             <Link
               href="/escolinha"
-              className={`text-sm font-bold uppercase tracking-widest underline underline-offset-4 hover:no-underline ${eventos.ponteBaseTime}`}
+              className={`text-sm font-bold uppercase tracking-widest text-white underline underline-offset-4 hover:no-underline ${eventos.ponteBaseTime}`}
             >
               Conhecer a escolinha →
             </Link>

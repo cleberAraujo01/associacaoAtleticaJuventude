@@ -216,7 +216,7 @@ export function AthletePath() {
           </div>
           <Link
             href="/time"
-            className={`group inline-flex items-center gap-2.5 rounded-full bg-red px-6 py-3 text-xs font-bold uppercase tracking-widest text-paper transition-colors hover:bg-red-ink focus-visible:outline-paper ${eventos.ponteBaseTime}`}
+            className={`group inline-flex items-center gap-2.5 rounded-full bg-red px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-red-ink focus-visible:outline-paper ${eventos.ponteBaseTime}`}
           >
             Acompanhar o time na FPFS
             <span

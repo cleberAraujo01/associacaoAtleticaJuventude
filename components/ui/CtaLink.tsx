@@ -13,14 +13,16 @@ interface CtaLinkProps {
 }
 
 const estilos: Record<Variante, string> = {
-  // Botão primário: vermelho sólido com texto branco. shadow-md dá separação
-  // quando o botão aparece sobre seções vermelhas/vinho; outline-ink no foco
-  // porque o outline vermelho global sumiria colado no fundo vermelho.
-  vermelho: "bg-red text-paper shadow-md hover:bg-red-ink hover:shadow-lg focus-visible:outline-ink",
+  // Botão primário: vermelho sólido com texto branco PURO (não paper): sobre
+  // o red #E4141B, paper fica em 4.2:1 e reprova o AA de texto pequeno;
+  // branco puro dá 4.8:1. shadow-md dá separação quando o botão aparece
+  // sobre seções vermelhas/vinho; outline-ink no foco porque o outline
+  // vermelho global sumiria colado no fundo vermelho.
+  vermelho: "bg-red text-white shadow-md hover:bg-red-ink hover:shadow-lg focus-visible:outline-ink",
   contorno: "border-2 border-ink text-ink hover:bg-ink hover:text-paper hover:shadow-lg",
-  // Para uso sobre fundos escuros/vermelhos (contraste AA com texto claro);
-  // outline-paper no foco — o outline vermelho global sumiria nesses fundos.
-  claro: "border-2 border-paper text-paper hover:bg-paper hover:text-red-ink hover:shadow-lg focus-visible:outline-paper",
+  // Para uso sobre fundos escuros/vermelhos — branco puro pelo mesmo motivo
+  // de contraste acima; outline-paper no foco (o vermelho global sumiria).
+  claro: "border-2 border-white text-white hover:bg-white hover:text-red-ink hover:shadow-lg focus-visible:outline-paper",
 };
 
 /**

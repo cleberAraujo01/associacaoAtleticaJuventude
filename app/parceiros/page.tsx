@@ -111,7 +111,7 @@ export default function ParceirosPage() {
                   <span
                     className={`absolute right-4 top-4 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest ${
                       parceiro.tipo === "patrocinador"
-                        ? "bg-red text-paper"
+                        ? "bg-red text-white"
                         : "border border-ink/15 text-ink/60"
                     }`}
                   >
@@ -284,7 +284,7 @@ export default function ParceirosPage() {
             <h2 className="font-display mx-auto max-w-2xl text-3xl uppercase leading-tight sm:text-4xl">
               Sua marca tem lugar nessa história.
             </h2>
-            <p className="mt-3 text-paper/90">
+            <p className="mt-3 text-white">
               Conte o que sua empresa procura e a gente monta o caminho juntos.
             </p>
             <div className="mt-7 flex flex-col items-center gap-4">
@@ -296,7 +296,7 @@ export default function ParceirosPage() {
                 href={links.whatsappApoio}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-paper/90 transition-colors hover:text-paper focus-visible:outline-paper ${eventos.saidaWhatsapp}`}
+                className={`group inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white underline underline-offset-4 hover:no-underline focus-visible:outline-paper ${eventos.saidaWhatsapp}`}
               >
                 <ChannelIcon canal="WhatsApp" className="h-4 w-4" />
                 Prefere WhatsApp? Chama a gente{" "}

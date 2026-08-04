@@ -67,7 +67,7 @@ export function Hero() {
               href={links.whatsappMatricula}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group inline-flex items-center justify-center gap-3 rounded-full bg-red px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-paper shadow-md transition-all hover:bg-red-ink hover:shadow-lg focus-visible:outline-paper ${eventos.ctaMatricula} ${eventos.saidaWhatsapp}`}
+              className={`group inline-flex items-center justify-center gap-3 rounded-full bg-red px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-white shadow-md transition-all hover:bg-red-ink hover:shadow-lg focus-visible:outline-paper ${eventos.ctaMatricula} ${eventos.saidaWhatsapp}`}
             >
               Garanta sua vaga
               <SetaCirculo />

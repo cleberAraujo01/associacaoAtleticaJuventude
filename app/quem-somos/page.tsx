@@ -174,7 +174,7 @@ export default function QuemSomosPage() {
             <h2 className="font-display mx-auto max-w-2xl text-3xl uppercase leading-tight sm:text-4xl">
               Seu filho também pode começar essa história.
             </h2>
-            <p className="mt-3 text-paper/90">
+            <p className="mt-3 text-white">
               Matrículas abertas para as turmas do Sub-8 ao Sub-16.
             </p>
             <div className="mt-7 flex justify-center">

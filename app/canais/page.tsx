@@ -77,8 +77,8 @@ export default function CanaisPage() {
           <h2 className="text-center font-display text-3xl uppercase md:text-left">
             Fale com a gente
           </h2>
-          <p className="mt-2 max-w-xl text-paper/90">
-            WhatsApp para matrículas e apoio, e-mail para imprensa — tudo na página de contato.
+          <p className="mt-2 max-w-xl text-white">
+            WhatsApp para matrículas e apoio, e-mail para imprensa: tudo na página de contato.
           </p>
           <div className="mt-6">
             <CtaLink href="/contato" variante="claro">

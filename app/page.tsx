@@ -61,7 +61,7 @@ export default function HomePage() {
               href={links.youtube}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group mb-8 inline-flex items-center gap-2.5 rounded-full bg-red px-6 py-3 text-xs font-bold uppercase tracking-widest text-paper transition-colors hover:bg-red-ink ${eventos.saidaYoutube}`}
+              className={`group mb-8 inline-flex items-center gap-2.5 rounded-full bg-red px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-red-ink ${eventos.saidaYoutube}`}
             >
               <ChannelIcon canal="YouTube" className="h-4 w-4" />
               Ver todos no YouTube

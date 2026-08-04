@@ -184,7 +184,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "enviando"}
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-red px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-paper shadow-md transition-all hover:bg-red-ink hover:shadow-lg focus-visible:outline-ink disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-red px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-white shadow-md transition-all hover:bg-red-ink hover:shadow-lg focus-visible:outline-ink disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {status === "enviando" ? "Enviando…" : "Enviar mensagem"}
       </button>

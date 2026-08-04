@@ -324,7 +324,7 @@ export default function EscolinhaPage() {
           />
           <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 sm:py-28 lg:grid-cols-2 lg:gap-14">
             <div>
-              <p className="inline-block bg-red px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-paper shadow-md">
+              <p className="inline-block bg-red px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-white shadow-md">
                 Estágio 03 · Competição
               </p>
               {/* Título quebrado em três linhas, como no cartaz */}
@@ -386,7 +386,7 @@ export default function EscolinhaPage() {
             <h2 className="font-display mx-auto max-w-2xl text-3xl uppercase leading-tight sm:text-4xl">
               Seu filho também pode começar essa história.
             </h2>
-            <p className="mt-3 text-paper/90">Matrículas abertas para as categorias de base.</p>
+            <p className="mt-3 text-white">Matrículas abertas para as categorias de base.</p>
             <div className="mt-7 flex justify-center">
               <CtaLink
                 href={links.whatsappMatricula}

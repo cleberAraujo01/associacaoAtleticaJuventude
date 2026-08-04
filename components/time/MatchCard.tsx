@@ -209,7 +209,7 @@ export function MatchCard({ jogo, passado = false }: MatchCardProps) {
               const r = inferirResultado(p.juventude, p.adversario);
               return (
                 <li key={p.categoria} className="flex items-center justify-between gap-3 py-2">
-                  <span className="inline-flex items-center bg-red px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-paper [clip-path:polygon(0_0,100%_0,88%_100%,0_100%)]">
+                  <span className="inline-flex items-center bg-red px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white [clip-path:polygon(0_0,100%_0,88%_100%,0_100%)]">
                     {p.categoria}
                   </span>
                   <span className="flex items-baseline gap-2">
@@ -238,7 +238,7 @@ export function MatchCard({ jogo, passado = false }: MatchCardProps) {
           <ul className="divide-y divide-ink/10">
             {categorias.map((c) => (
               <li key={c.categoria} className="flex items-center justify-between gap-3 py-2">
-                <span className="inline-flex items-center bg-red px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-paper [clip-path:polygon(0_0,100%_0,88%_100%,0_100%)]">
+                <span className="inline-flex items-center bg-red px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white [clip-path:polygon(0_0,100%_0,88%_100%,0_100%)]">
                   {c.categoria}
                 </span>
                 <span className="font-display text-lg leading-none text-red-ink">
@@ -253,7 +253,7 @@ export function MatchCard({ jogo, passado = false }: MatchCardProps) {
             {categorias.map((c) => (
               <span
                 key={c.categoria}
-                className="inline-flex items-center bg-red px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-paper [clip-path:polygon(0_0,100%_0,92%_100%,0_100%)]"
+                className="inline-flex items-center bg-red px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white [clip-path:polygon(0_0,100%_0,92%_100%,0_100%)]"
               >
                 {c.categoria}
               </span>
