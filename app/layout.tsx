@@ -36,11 +36,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR" className={`${anton.variable} ${raleway.variable}`}>
       <head>
         {/* Decide ANTES do primeiro paint se o splash de abertura roda:
-            só na primeira página da sessão e sem prefers-reduced-motion.
+            só na HOME, na primeira página da sessão e sem prefers-reduced-motion.
+            Restrito à home: o momento de marca fica na porta de entrada e as
+            páginas internas carregam sem os ~2,7s da cortina (Speed Index).
             Inline para não haver flash do conteúdo antes do overlay. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(!sessionStorage.getItem("aja-splash")&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.dataset.splash="1"}catch(e){}`,
+            __html: `try{if(location.pathname==="/"&&!sessionStorage.getItem("aja-splash")&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.dataset.splash="1"}catch(e){}`,
           }}
         />
       </head>

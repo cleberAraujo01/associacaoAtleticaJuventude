@@ -39,7 +39,7 @@ export function PageBanner({
 
   return (
     <section className="relative overflow-hidden bg-red text-paper">
-      <link rel="preload" as="image" href={capa} />
+      <link rel="preload" as="image" href={capa} fetchPriority="high" />
       {/* Foto em camada própria com o zoom-out lento de abertura (hero-zoom,
           o mesmo da home) — anima só a imagem, sem mexer no texto. A escala
           inicial de 1.1 nunca revela borda porque a camada cobre a seção.

@@ -47,6 +47,7 @@ export function SplashIntro() {
         width={224}
         height={224}
         priority
+        quality={60}
         sizes="(min-width: 640px) 11rem, 9rem"
         className="splash-intro__brasao h-auto w-36 drop-shadow-[0_8px_32px_rgba(0,0,0,0.6)] sm:w-44"
       />
