@@ -7,6 +7,14 @@ import type { Parceiro } from "@/types";
  */
 export const parceiros: Parceiro[] = [
   {
+    id: "bmw-agency",
+    nome: "BMW Agency",
+    descricao: "Gestão esportiva",
+    logo: "/parceiros/bmw-agency.png",
+    url: "https://www.bmwagency.com.br/",
+    tipo: "parceiro",
+  },
+  {
     id: "araujo-servicos",
     nome: "Araujo Serviços",
     descricao: "Tecnologia da Informação",

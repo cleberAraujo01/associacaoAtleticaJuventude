@@ -104,7 +104,7 @@ export function SupportCTA({ parceiros }: SupportCTAProps) {
                   Quero apoiar o clube
                 </CtaLink>
                 <Link
-                  href="/apoie"
+                  href="/parceiros"
                   className="group text-center text-sm font-bold uppercase tracking-widest text-paper/90 transition-colors hover:text-paper"
                 >
                   Como funciona o apoio{" "}
@@ -142,7 +142,7 @@ function CardParceiro({ parceiro, principal }: { parceiro: Parceiro; principal?:
         alt={`Logo de ${parceiro.nome}`}
         width={principal ? 400 : 320}
         height={principal ? 240 : 200}
-        className={`w-auto object-contain transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none ${
+        className={`w-auto rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none ${
           principal ? "h-40 sm:h-48" : "h-32 sm:h-40"
         }`}
       />

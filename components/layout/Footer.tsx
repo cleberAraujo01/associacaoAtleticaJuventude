@@ -43,11 +43,6 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/apoie" className={linkClasse}>
-                  Apoie o clube
-                </Link>
-              </li>
             </ul>
           </nav>
 

@@ -21,8 +21,8 @@ export const nav = [
   { href: "/da-base-ao-time", label: "Da base ao time" },
   { href: "/quem-somos", label: "Quem somos" },
   { href: "/canais", label: "Canais" },
-  // "/apoie" fora do menu principal: a captação de apoio acontece pela seção
-  // de patrocinadores na home e no footer (decisão de foco do menu nas 2 trilhas).
+  // Captação de apoio fora do menu principal: acontece pela seção de
+  // patrocinadores na home e pela /parceiros (decisão de foco nas 2 trilhas).
 ] as const;
 
 /**
@@ -31,7 +31,6 @@ export const nav = [
  * hambúrguer do header — fonte única para não divergirem.
  */
 export const navExtra = [
-  { href: "/apoie", label: "Apoie o clube" },
   { href: "/parceiros", label: "Parceiros e apoiadores" },
   { href: "/contato", label: "Contato" },
 ] as const;
