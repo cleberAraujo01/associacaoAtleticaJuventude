@@ -51,7 +51,7 @@ export function PageBanner({
           priority
           fetchPriority="high"
           sizes="100vw"
-          quality={60}
+          quality={50}
           aria-hidden="true"
           className="object-cover"
           style={{ objectPosition: posicao }}

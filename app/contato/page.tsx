@@ -66,10 +66,13 @@ export default function ContatoPage() {
         </a>
       </PageBanner>
 
-      {/* Atalhos por assunto + formulário lado a lado no desktop */}
+      {/* Atalhos por assunto + formulário lado a lado no desktop.
+          Sem Reveal nesta seção: ela entra na dobra inicial do mobile, e o
+          fade pós-hidratação segurava o Speed Index no Lighthouse (conteúdo
+          invisível até o JS chegar). O Reveal segue nas seções abaixo. */}
       <section id="assuntos" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16">
         <div className="grid gap-12 lg:grid-cols-[2fr_3fr] lg:gap-16">
-          <Reveal>
+          <div>
             <SectionHeading rotulo="Por assunto">Direto ao ponto</SectionHeading>
             <ul className="space-y-4">
               {assuntos.map((item) => (
@@ -127,10 +130,10 @@ export default function ContatoPage() {
                 </li>
               ))}
             </ul>
-          </Reveal>
+          </div>
 
           {/* Formulário em painel "súmula": barra vermelha no topo + borda ink */}
-          <Reveal atraso={100}>
+          <div>
             <div id="formulario" className="scroll-mt-24">
               <div className="overflow-hidden rounded-2xl border-2 border-ink/10 bg-white">
                 <div aria-hidden="true" className="h-2 bg-red" />
@@ -142,7 +145,7 @@ export default function ContatoPage() {
                 </div>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
