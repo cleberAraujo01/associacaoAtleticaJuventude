@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 /**
@@ -17,6 +18,7 @@ import { useEffect, useState } from "react";
  * de tela vão direto ao conteúdo.
  */
 export function SplashIntro() {
+  const pathname = usePathname();
   const [ativo, setAtivo] = useState(true);
 
   useEffect(() => {
@@ -36,7 +38,11 @@ export function SplashIntro() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (!ativo) return null;
+  // O splash só roda na home (script inline no layout). Fora dela nem o DOM
+  // é renderizado: sem isso, o Image com priority abaixo emitiria um preload
+  // do brasão em TODAS as páginas, furando a fila na frente da imagem do
+  // banner (o LCP) nas conexões lentas.
+  if (pathname !== "/" || !ativo) return null;
 
   return (
     <div aria-hidden="true" className="splash-intro">

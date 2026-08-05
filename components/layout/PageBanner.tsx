@@ -49,6 +49,7 @@ export function PageBanner({
           alt=""
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
           quality={60}
           aria-hidden="true"
