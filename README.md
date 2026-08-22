@@ -69,3 +69,4 @@ defaults do Next.js. Cada push na `main` publica automaticamente.
 - [ ] Testar em 3G no DevTools (público mobile)
 
 <!-- piloto ALETHEIA: PR de demonstracao, 2026-08-21 -->
+<!-- segunda rodada: runner piloto-2 -->
