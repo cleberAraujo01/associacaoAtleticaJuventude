@@ -1,0 +1,23 @@
+# ALETHEIA — detecção autônoma de regressão em todo PR.
+# Gatilho: deploy de preview bem-sucedido na Vercel. O shim compara o preview
+# do PR com a produção e comenta o resultado no próprio PR.
+name: ALETHEIA
+on:
+  deployment_status:
+jobs:
+  regressao:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment != 'Production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions: { contents: read, pull-requests: write }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cleberAraujo01/ALETHEIA/shims/github-action@piloto-1
+        with:
+          aletheia-ref: piloto-1
+          base-url: https://associacao-atletica-juventude-black.vercel.app
+          head-url: ${{ github.event.deployment_status.environment_url }}
+          journey: .aletheia/jornada.json
+          secret-header: x-vercel-protection-bypass=VERCEL_AUTOMATION_BYPASS_SECRET
+        env:
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}

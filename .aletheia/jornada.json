@@ -1,0 +1,14 @@
+{
+  "journeyVersion": "0.1.0",
+  "name": "juventude-rotas",
+  "viewport": { "width": 1280, "height": 800 },
+  "observations": [
+    { "observationId": "home", "path": "/" },
+    { "observationId": "quem-somos", "path": "/quem-somos" },
+    { "observationId": "time", "path": "/time" },
+    { "observationId": "escolinha", "path": "/escolinha" },
+    { "observationId": "parceiros", "path": "/parceiros" },
+    { "observationId": "canais", "path": "/canais" },
+    { "observationId": "contato", "path": "/contato" }
+  ]
+}
