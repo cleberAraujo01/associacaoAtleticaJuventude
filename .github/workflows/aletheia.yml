@@ -12,9 +12,9 @@ jobs:
     permissions: { contents: read, pull-requests: write }
     steps:
       - uses: actions/checkout@v4
-      - uses: cleberAraujo01/ALETHEIA/shims/github-action@piloto-1
+      - uses: cleberAraujo01/ALETHEIA/shims/github-action@piloto-2
         with:
-          aletheia-ref: piloto-1
+          aletheia-ref: piloto-2
           base-url: https://associacao-atletica-juventude-black.vercel.app
           head-url: ${{ github.event.deployment_status.environment_url }}
           journey: .aletheia/jornada.json
