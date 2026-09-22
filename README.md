@@ -70,3 +70,4 @@ defaults do Next.js. Cada push na `main` publica automaticamente.
 
 <!-- piloto ALETHEIA: PR de demonstracao, 2026-08-21 -->
 <!-- segunda rodada: runner piloto-2 -->
+<!-- terceira rodada: runner piloto-3 -->
