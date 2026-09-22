@@ -67,3 +67,7 @@ defaults do Next.js. Cada push na `main` publica automaticamente.
 - [ ] axe DevTools sem violações
 - [ ] Navegação completa por teclado (Tab por toda a home)
 - [ ] Testar em 3G no DevTools (público mobile)
+
+<!-- piloto ALETHEIA: PR de demonstracao, 2026-08-21 -->
+<!-- segunda rodada: runner piloto-2 -->
+<!-- terceira rodada: runner piloto-3 -->
